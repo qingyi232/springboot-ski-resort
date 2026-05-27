@@ -1,0 +1,18 @@
+# DeepSeek AI配置
+deepseek:
+  # API密钥
+  api-key: sk-3b30d9ad425d450ba28d54324d98450a
+  
+  # API地址
+  api-url: https://api.deepseek.com/v1/chat/completions
+  
+  # 模型名称
+  model: deepseek-chat
+  
+  # 最大Token数
+  max-tokens: 2000
+  
+  # 温度参数（0-1，越高越随机）
+  temperature: 0.7
+
+

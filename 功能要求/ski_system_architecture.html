@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飞跃滑雪场管理系统 - 功能架构图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .title {
+            font-size: 2.2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            color: #7f8c8d;
+        }
+        
+        /* 系统架构图样式 */
+        .system-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .root-node {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            border: 3px solid #5a67d8;
+        }
+        
+        .user-roles {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .role-section {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .role-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.3);
+            border: 2px solid #3182ce;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .role-icon {
+            font-size: 1.3em;
+        }
+        
+        .function-modules {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        
+        .function-item {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.95em;
+            color: #2d3748;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .function-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .function-item::before {
+            content: "▶";
+            color: #667eea;
+            font-size: 0.8em;
+            margin-right: 8px;
+        }
+        
+        /* 连接线样式 */
+        .connection-lines {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .main-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background: #667eea;
+            transform: translateX(-50%);
+        }
+        
+        .branch-lines {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: #667eea;
+        }
+        
+        .branch-points {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            transform: translateY(-50%);
+        }
+        
+        .branch-point {
+            width: 2px;
+            height: 20px;
+            background: #667eea;
+        }
+        
+        /* 角色特定颜色 */
+        .admin-role .role-header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border-color: #e74c3c;
+        }
+        
+        .admin-role .function-item:hover {
+            border-color: #e74c3c;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.15);
+        }
+        
+        .admin-role .function-item::before {
+            color: #e74c3c;
+        }
+        
+        .user-role .role-header {
+            background: linear-gradient(135deg, #4ecdc4 0%, #00d2d3 100%);
+            border-color: #17a2b8;
+        }
+        
+        .user-role .function-item:hover {
+            border-color: #17a2b8;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.15);
+        }
+        
+        .user-role .function-item::before {
+            color: #17a2b8;
+        }
+        
+        .coach-role .role-header {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 100%);
+            border-color: #28a745;
+        }
+        
+        .coach-role .function-item:hover {
+            border-color: #28a745;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.15);
+        }
+        
+        .coach-role .function-item::before {
+            color: #28a745;
+        }
+        
+        .staff-role .role-header {
+            background: linear-gradient(135deg, #ffd3a5 0%, #fd9853 100%);
+            border-color: #fd7e14;
+        }
+        
+        .staff-role .function-item:hover {
+            border-color: #fd7e14;
+            box-shadow: 0 4px 15px rgba(253, 126, 20, 0.15);
+        }
+        
+        .staff-role .function-item::before {
+            color: #fd7e14;
+        }
+        
+        @media (max-width: 768px) {
+            .user-roles {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .role-section {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎿 飞跃滑雪场管理系统</h1>
+            <p class="subtitle">系统功能架构图</p>
+        </div>
+        
+        <div class="system-tree">
+            <!-- 根节点 -->
+            <div class="root-node">
+                滑雪场管理系统
+            </div>
+            
+            <!-- 连接线 -->
+            <div class="connection-lines">
+                <div class="main-line"></div>
+                <div class="branch-lines"></div>
+                <div class="branch-points">
+                    <div class="branch-point"></div>
+                    <div class="branch-point"></div>
+                    <div class="branch-point"></div>
+                    <div class="branch-point"></div>
+                </div>
+            </div>
+            
+            <!-- 用户角色层 -->
+            <div class="user-roles">
+                <!-- 系统管理员 -->
+                <div class="role-section admin-role">
+                    <div class="role-header">
+                        <span class="role-icon">👨‍💼</span>
+                        系统管理员
+                    </div>
+                    <div class="function-modules">
+                        <div class="function-item">用户管理</div>
+                        <div class="function-item">权限控制</div>
+                        <div class="function-item">系统配置</div>
+                        <div class="function-item">数据统计</div>
+                        <div class="function-item">财务报表</div>
+                        <div class="function-item">员工管理</div>
+                        <div class="function-item">薪资管理</div>
+                        <div class="function-item">日志管理</div>
+                        <div class="function-item">系统监控</div>
+                        <div class="function-item">数据备份</div>
+                    </div>
+                </div>
+                
+                <!-- 普通用户 -->
+                <div class="role-section user-role">
+                    <div class="role-header">
+                        <span class="role-icon">👤</span>
+                        普通用户
+                    </div>
+                    <div class="function-modules">
+                        <div class="function-item">用户注册</div>
+                        <div class="function-item">用户登录</div>
+                        <div class="function-item">雪具租赁</div>
+                        <div class="function-item">装备购买</div>
+                        <div class="function-item">教练预约</div>
+                        <div class="function-item">课程报名</div>
+                        <div class="function-item">订单查询</div>
+                        <div class="function-item">会员充值</div>
+                        <div class="function-item">积分查询</div>
+                        <div class="function-item">个人中心</div>
+                    </div>
+                </div>
+                
+                <!-- 教练 -->
+                <div class="role-section coach-role">
+                    <div class="role-header">
+                        <span class="role-icon">🏂</span>
+                        教练
+                    </div>
+                    <div class="function-modules">
+                        <div class="function-item">个人信息</div>
+                        <div class="function-item">课程管理</div>
+                        <div class="function-item">预约管理</div>
+                        <div class="function-item">学员管理</div>
+                        <div class="function-item">教学记录</div>
+                        <div class="function-item">薪资查询</div>
+                        <div class="function-item">工作排班</div>
+                        <div class="function-item">评价反馈</div>
+                        <div class="function-item">技能认证</div>
+                        <div class="function-item">消息通知</div>
+                    </div>
+                </div>
+                
+                <!-- 工作人员 -->
+                <div class="role-section staff-role">
+                    <div class="role-header">
+                        <span class="role-icon">👩‍💼</span>
+                        工作人员
+                    </div>
+                    <div class="function-modules">
+                        <div class="function-item">雪具出租</div>
+                        <div class="function-item">雪具归还</div>
+                        <div class="function-item">装备销售</div>
+                        <div class="function-item">库存管理</div>
+                        <div class="function-item">订单处理</div>
+                        <div class="function-item">收银结算</div>
+                        <div class="function-item">会员服务</div>
+                        <div class="function-item">设备维护</div>
+                        <div class="function-item">场地管理</div>
+                        <div class="function-item">客户服务</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

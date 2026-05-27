@@ -1,0 +1,441 @@
+[0] Style:Normal | 
+[1] Style:Normal | 
+[2] Style:Normal | 
+[3] Style:Normal | 
+[4] Style:Normal | 
+[5] Style:Normal | 
+[6] Style:Normal | 
+[7] Style:Normal |   本科毕业论文（设计）
+[8] Style:Normal | 
+[9] Style:Body Text First Indent | 基于Spring Boot的飞跃滑雪场管理系统的设计与实现
+[10] Style:Body Text First Indent | 	
+[11] Style:Body Text First Indent | 	
+[12] Style:Normal | 
+[13] Style:Normal | 	
+[14] Style:Normal | 
+[15] Style:Normal | 二〇二六年五月三十日
+[16] Style:Normal | 
+[17] Style:Normal | 毕业论文原创性声明
+[18] Style:Normal | 
+[19] Style:Normal | 
+[20] Style:Normal | 本人所提交的毕业论文（设计）基于Spring Boot的飞跃滑雪场管理系统的设计与实现，是在导师的指导下，独立进行研究工作所取得的原创性成果。除文中已经注明引用的内容外，文中不包含任何其他个人或集体已经发表或撰写过的研究成果。对本文的研究做出重要贡献的个人和集体，均已在文中标明。
+[21] Style:Normal | 本声明的法律后果由本人承担。
+[22] Style:Normal | 
+[23] Style:Normal | 
+[24] Style:Normal | 论文（设计）作者（签名）：               指导教师确认（签名）：
+[25] Style:Normal | 2026年5月30日                     2026年5月30日
+[26] Style:Normal | 
+[27] Style:Normal | 
+[28] Style:Normal | 
+[29] Style:Normal | 毕业论文版权使用授权书
+[30] Style:Normal | 
+[31] Style:Normal | 本文作者完全了解河北东方学院有权保留并向国家有关部门或机构送交本文的复印件和磁盘，允许本文被查阅和借阅。本人授权河北东方学院可以将毕业论文（设计）的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印或其它复制手段保存、汇编学位论文。
+[32] Style:Normal | 
+[33] Style:Body Text First Indent | 
+[34] Style:Normal | 
+[35] Style:Normal | 论文（设计）作者（签名）：                   指导教师（签名）：
+[36] Style:Normal | 2026年5月30日                      2026年5月30日
+[37] Style:Normal | 
+[38] Style:Normal | 
+[39] Style:Normal | 摘　　要
+[40] Style:Normal | 近些年来，随着冰雪运动的推广和普及，国内滑雪场数量不断增加，但很多中小型滑雪场在管理方面还比较传统，存在效率低、信息不通畅等问题。本文设计并实现了一套基于Spring Boot的飞跃滑雪场管理系统。
+[41] Style:Normal | 系统采用前后端分离的B/S架构。后端使用Spring Boot框架，数据持久化采用MyBatis操作MySQL数据库，引入Redis做数据缓存，身份认证使用JWT实现；前端使用Vue框架搭配Element Plus组件库进行页面开发。
+[42] Style:Normal | 系统按照角色划分为管理员、教练、工作人员和普通用户四个部分。管理员负责系统整体的数据管理，包括用户管理、教练管理、课程管理、场地管理、商品管理和数据统计等功能。教练可以查看自己负责的课程和学员预约信息，并进行确认操作。工作人员主要负责商品租赁的日常办理、订单处理和库存管理等前台业务。普通用户可以在线浏览课程和教练信息，进行商品租赁、教练预约、课程报名和场地预约等操作。经测试，系统各项功能运行正常，能够满足中小型滑雪场的日常运营管理需求。
+[43] Style:Normal | 
+[44] Style:Normal | 关键词：Spring Boot；滑雪场管理；前后端分离；Vue；MySQL
+[45] Style:Normal | 
+[46] Style:Heading 1 | ABSTRACT
+[47] Style:Normal | In recent years, with the promotion of ice and snow sports, the number of ski resorts in China has been increasing. However, many small and medium-sized ski resorts still rely on traditional management methods. This paper designs and implements a ski resort management system based on the Spring Boot framework.
+[48] Style:Normal | The system adopts a front-end and back-end separated B/S architecture. The back-end uses Spring Boot, MyBatis with MySQL, Redis for caching, and JWT for authentication. The front-end is built with Vue and Element Plus.
+[49] Style:Normal | The system is divided into four roles: administrator, coach, staff, and ordinary user. The administrator manages all business data. The coach views courses and manages student appointments. The staff handles daily rental operations and order processing. Ordinary users can browse information and perform rental, booking, and registration operations. After testing, all functions run normally and meet the daily management needs of small and medium-sized ski resorts.
+[50] Style:Normal | 
+[51] Style:Normal | Key words：Spring Boot；Ski Resort Management；Front-end and Back-end Separation；Vue；MySQL
+[52] Style:Normal | 
+[53] Style:Normal | 
+[54] Style:Normal | 
+[55] Style:Normal | 
+[56] Style:Heading 1 | 第1章　绪论
+[57] Style:Heading 2 | 1.1　研究背景与意义	
+[58] Style:Normal | 冰雪运动在我国有比较长的历史，尤其在东北和华北地区，滑雪一直是冬季比较受欢迎的运动项目。2015年北京申办冬奥会成功以后，国家提出了“带动三亿人参与冰雪运动”的目标[1]，各地的滑雪场建设明显加快。根据行业数据，2023年全国滑雪场已超过700家[2]。
+[59] Style:Normal | 不过从实际情况来看，很多中小型滑雪场在管理上还比较传统。有的雪场租赁雪具还在用纸质登记本，有的教练预约靠电话或微信沟通，收入数据统计也不方便。随着客流量增大，这些做法已难以满足实际需求[3]。
+[60] Style:Normal | 开发一套针对滑雪场业务的管理系统，能够将各项业务流程规范化，使管理者实时掌握运营状况，同时为顾客提供更加便捷的服务体验。这是本文选择开发滑雪场管理系统的出发点。
+[61] Style:Normal | 本文设计的飞跃滑雪场管理系统，主要面向中小型雪场的日常运营管理。系统里涵盖了雪具租赁、教练预约、课程报名、场地预约等滑雪场最常见的业务场景，管理员、教练、工作人员和普通用户分别拥有各自的操作界面和功能权限。开发本系统也是对大学期间所学Java和前端知识的综合应用，以期为雪场的信息化建设提供参考。
+[62] Style:Heading 2 | 1.2　国内外研究现状
+[63] Style:Normal | 国外方面，欧洲和北美的大型滑雪度假村较早就开始使用信息化管理工具了，如瑞士、奥地利的一些知名雪场基本都有完善的票务和租赁管理系统。美国的Vail Resorts集团甚至开发了自己的EpicMix平台，把滑雪数据追踪和社交分享功能进行了整合。但这些系统多是商业化的定制产品，价格较高，且不太适合国内中小型雪场直接使用。
+[64] Style:Normal | 国内方面，滑雪场管理系统发展起步较晚，早期多是基于C/S架构开发的桌面应用，功能上以票务管理和财务管理为主，对租赁、预约等业务支持不够。随着Web技术发展，越来越多的开发者开始采用B/S架构来设计滑雪场管理系统，这样用户通过浏览器就可以访问。目前主流的技术方案是后端用Spring Boot[4]，前端用Vue[5]，这也是本文系统采用的技术路线。
+[65] Style:Heading 2 | 1.3　主要研究内容
+[66] Style:Normal | 本文围绕飞跃滑雪场管理系统，主要做了以下工作：
+[67] Style:Normal | （1）对滑雪场的实际业务进行了调研和分析，通过查阅资料、浏览同类网站和访谈等方式，了解了滑雪场在雪具租赁、教练预约、课程管理、场地管理等方面的业务需求，确定了系统应当具备的功能模块和管理员、教练、工作人员、普通用户四种使用角色。
+[68] Style:Normal | （2）完成了系统的总体设计工作，包括技术架构选型（前后端分离的B/S架构）、前后端框架选择（Spring Boot + Vue 3）、功能模块划分、数据库表结构设计（9张业务表）和API接口设计等。
+[69] Style:Normal | （3）按照设计方案编码实现了各项功能。后端使用Spring Boot框架编写了多个Controller和Service层代码，前端使用Vue 3开发了30多个页面组件，涵盖了登录注册、商品管理、教练预约、课程报名、场地管理、数据统计等全部业务功能。
+[70] Style:Normal | （4）对系统进行了功能测试和性能测试，编写了测试用例验证各模块的功能正确性，并对主要接口的响应时间进行了测量，确认系统运行稳定。
+[71] Style:Heading 2 | 1.4　论文组织结构
+[72] Style:Normal | 本论文共七章，各章内容安排如下：第一章是绪论部分，介绍课题的研究背景和意义，梳理了国内外在滑雪场管理信息化方面的现状。第二章对开发中用到的核心技术做了介绍，包括Spring Boot、MyBatis、MySQL、Redis、JWT、Vue等。第三章是需求分析，详细分析了系统应具备的功能模块和非功能需求，并按角色绘制了用例图。第四章是系统设计，介绍了总体架构、前后端技术方案和数据库表结构设计。第五章是系统实现，展示了各模块的实现过程和核心代码。第六章是系统测试，给出了功能测试和性能测试的结果。第七章对整个毕设工作做了总结，并提出了后续改进方向。
+[73] Style:Heading 1 | 第2章　相关技术介绍
+[74] Style:Heading 2 | 2.1　Spring Boot框架
+[75] Style:Normal | Spring Boot是Pivotal团队提供的用于简化Spring应用开发的框架[6]。在传统的Spring项目中，开发者需要写大量的XML配置文件，较为繁琐。Spring Boot通过"约定优于配置"的理念，大幅减少了配置工作量，开发者只需要引入相应的Starter依赖，框架就会自动完成大部分配置[4]。
+[76] Style:Normal | 本系统使用的是Spring Boot 2.7版本。选择该版本的原因是其较为成熟稳定，且相关教程和文档较为丰富，便于解决开发中遇到的问题。在本项目中，Spring Boot主要承担三方面职责：一是作为Web服务器，内嵌Tomcat无需额外部署；二是管理各个组件之间的依赖关系；三是通过application.yml文件集中管理各种配置参数。
+[77] Style:Heading 2 | 2.2　MyBatis持久层框架
+[78] Style:Normal | MyBatis是一个比较流行的Java持久层框架，它的定位介于JDBC和Hibernate之间[7]。跟直接写JDBC相比，MyBatis封装了底层的数据库连接和结果集映射，避免编写重复的代码；跟Hibernate相比，MyBatis赋予开发者更大的SQL控制权，允许自行编写SQL语句。
+[79] Style:Normal | 在本项目中，每个数据库表对应一个Mapper接口和一个XML文件，接口里定义方法，XML里写具体的SQL。比如用户表对应的就是UserMapper接口和UserMapper.xml。MyBatis支持动态SQL，进行条件分页查询时，可以根据实际传入的参数灵活拼接查询语句，比如商品列表可以按名称、分类任意组合筛选。
+[80] Style:Heading 2 | 2.3　MySQL数据库
+[81] Style:Normal | MySQL是目前全球使用很广泛的开源关系型数据库[8]。它性能优良，运行稳定，且免费开源，比较适合中小型项目[9]。本系统使用MySQL 8.0版本，这个版本默认采用utf8mb4编码，可以很好地存储中文字符。
+[82] Style:Normal | 系统的数据库名为ski_resort，共创建了9张业务表，使用InnoDB作为存储引擎，支持事务操作。所有表都采用了BIGINT类型的自增主键，并且设置了create_time和update_time字段来记录数据的创建和更新时间。
+[83] Style:Heading 2 | 2.4　Redis缓存
+[84] Style:Normal | Redis是一个开源的内存数据存储系统，由于数据存储在内存中，其读写速度远高于传统数据库[10]。在本系统中，Redis主要用于缓存统计概览数据和热门排行榜等不经常变化的数据。通过引入spring-boot-starter-data-redis依赖，可以很方便地在Spring Boot项目中使用Redis。项目中还对Redis的序列化方式做了配置，用Jackson替代默认的JDK序列化，这样存在Redis里的数据看起来更直观。
+[85] Style:Heading 2 | 2.5　JWT身份认证
+[86] Style:Normal | JWT全称是JSON Web Token，是一种用于在各方之间安全传递信息的开放标准[11]。在本系统中，JWT用于实现用户的身份认证。其工作流程如下：用户登录成功后，服务端生成一个包含用户ID、用户名和角色信息的Token返回给前端；前端收到Token后将其存储在本地，之后每次发请求都在HTTP头部带上这个Token；服务端收到请求后验证Token的有效性，确认用户身份。本项目使用的JWT库是jjwt，Token有效期设为7天。
+[87] Style:Heading 2 | 2.6　Vue前端框架
+[88] Style:Normal | Vue是一个构建用户界面的渐进式JavaScript框架，在国内Web开发中应用广泛[12]。本系统使用Vue 3版本，相比Vue 2，它在性能和TypeScript支持方面都有改进。前端项目使用Vite作为构建工具，启动速度显著优于传统的Webpack。UI组件库用的Element Plus[13]，提供了表格、表单、对话框、分页器等组件，开发效率比较高。状态管理用Pinia，用来在不同组件之间共享用户登录状态等数据。数据可视化部分用ECharts[14]来画统计图表。
+[89] Style:Heading 2 | 2.7　其他相关技术
+[90] Style:Normal | （1）Lombok：一个Java工具库，通过注解的方式自动生成实体类的getter、setter、构造方法等代码，省去了手工编写的工作量。
+[91] Style:Normal | （2）Knife4j：基于Swagger的API文档生成工具，可以自动根据Controller中的注解生成在线接口文档，方便前后端开发人员联调。
+[92] Style:Normal | （3）Spring Security：Spring生态中的安全框架，本项目主要使用它提供的BCryptPasswordEncoder来对用户密码进行加密存储。
+[93] Style:Normal | （4）Axios：基于Promise的HTTP客户端库，用于前端向后端发送请求[15]。项目中对Axios进行了二次封装，请求拦截器会自动从Pinia Store中取出Token加到请求头里，响应拦截器统一处理后端返回的错误码，如果Token过期就自动跳转到登录页面。
+[94] Style:Heading 1 | 第3章　系统需求分析
+[95] Style:Heading 2 | 3.1　系统概述
+[96] Style:Normal | 飞跃滑雪场管理系统是一个面向中小型滑雪场运营管理需求的Web应用系统。系统的使用者按角色分为四类：管理员、教练、工作人员和普通用户。管理员拥有最高权限，可以管理所有业务数据；教练可以查看和管理自己的课程及学员预约；工作人员负责日常的雪具租赁办理和订单处理等前台业务；普通用户则可以浏览滑雪场的各项服务信息，进行商品租赁、教练预约、课程报名和场地预约等操作。
+[97] Style:Normal | 在需求调研过程中，主要参考了以下几方面资料：一是浏览国内多家滑雪场的官方网站，了解其提供的在线服务内容；二是查阅体育场馆管理系统相关论文，了解此类系统通常应具备的功能；三是向有滑雪经历的同学了解其作为消费者的需求和体验。综合以上信息，确定了系统的主要功能模块和各角色的操作权限。
+[98] Style:Heading 2 | 3.2　功能需求分析
+[99] Style:Normal | 根据对滑雪场实际业务的调研，本系统按照四种角色组织功能模块，系统总体功能结构如图3.1所示：
+[100] Style:Normal | 
+[101] Style:Normal | 图3.1　系统功能结构图
+[102] Style:Heading 3 | 3.2.1　管理员功能
+[103] Style:Normal | 管理员是系统的最高权限角色，登录后台管理界面后可以进行所有管理操作。用户管理模块可以查看所有注册用户的列表，支持按用户名、手机号等条件搜索，可以新增用户、编辑用户信息、禁用或启用用户账号、为用户分配不同的角色。教练管理模块可以录入教练的基本信息（姓名、等级、专长、课时费等），更新教练的在职/休假状态。课程管理模块可以发布新课程、编辑现有课程信息、更新课程状态。场地管理模块可以录入和编辑场地信息，切换场地的开放/维护状态。商品管理模块可以管理雪具和装备的基本信息及库存数量。数据统计模块展示系统的运营数据概览和各类可视化图表。
+[104] Style:Normal | 表3.1　管理员用例描述
+[105] Style:Normal | 
+[106] Style:Normal | 
+
+
+[107] Style:Normal | 图3.2　管理员用例图
+[108] Style:Heading 3 | 3.2.2　教练功能
+[109] Style:Normal | 教练使用自己的账号登录后台，看到的是教练专属的功能菜单。“我的课程”面展示教练自己负责教授的所有课程列表，可以查看每门课程的详细信息和报名学员名单。“员预约”面列出学员对该教练的所有预约记录，教练可以对待确认的预约进行确认或取消操作。在个人中心页面，教练可以查看与自己相关的统计数据（如本月课时数、预约次数等），也可以修改自己的个人资料和登录密码。
+[110] Style:Normal | 表3.2　教练用例描述
+[111] Style:Normal | 
+[112] Style:Normal | 图3.3　教练用例图
+[113] Style:Heading 3 | 3.2.3　工作人员功能
+[114] Style:Normal | 工作人员是滑雪场前台业务的日常操作人员，相当于柜台工作人员。工作人员登录后台后，主要的工作内容包括：为到场的顾客办理雪具和装备的租赁手续，登记租赁信息并生成订单；当顾客归还商品时，确认归还并更新订单状态；查看当前所有的租赁订单列表，了解在租和待归还的商品情况；管理商品库存，及时更新商品的可用数量和状态（如把损坏的雪具标记为维修中）；还可以查看各场地的实时使用情况。
+[115] Style:Normal | 表3.3　工作人员用例描述
+[116] Style:Normal | 续表3.3　工作人员用例描述
+[117] Style:Normal | 
+[118] Style:Normal | 图3.4　工作人员用例图
+[119] Style:Heading 3 | 3.2.4　普通用户功能
+[120] Style:Normal | 普通用户是系统的最终使用者，通过前台页面来使用系统。首先需要注册一个账号并登录，登录后可以浏览系统中的各种信息：在商品租赁页面查看可租赁的雪具和装备列表，选择需要的商品提交租赁订单；在教练预约页面浏览各位教练的等级、专长和课时费信息，选择合适的教练提交预约；在滑雪课程页面浏览所有开放报名的课程，选择感兴趣的课程报名参加；在场地信息页面查看各场地的状态和详情，对需要预约的场地进行预约。此外在个人中心可以查看自己的所有订单和预约记录，也可以修改个人资料和登录密码。
+[121] Style:Normal | 表3.4　普通用户用例描述
+[122] Style:Normal | 
+[123] Style:Normal | 图3.5　普通用户用例图
+[124] Style:Heading 2 | 3.3　非功能需求
+[125] Style:Normal | （1）性能需求：系统页面的平均响应时间应控制在2秒以内，对于数据量较大的列表查询应支持分页功能，避免一次性加载过多数据导致页面响应缓慢。
+[126] Style:Normal | （2）安全需求：用户密码必须加密存储，不能以明文形式保存在数据库中；接口调用需要携带有效的Token进行身份验证，防止未授权的访问。
+[127] Style:Normal | （3）兼容性需求：系统前端应兼容主流浏览器，包括Chrome、Firefox、Edge等。由于前端使用了Vue 3和Element Plus，这些框架本身对现代浏览器有比较好的兼容性。需要注意的是IE浏览器不支持，因为Vue 3已经放弃了对IE的支持。
+[128] Style:Normal | （4）可维护性需求：代码结构要清晰，采用分层架构，各层之间职责明确。后端严格按照Controller-Service-Mapper三层架构来组织代码，每层只做自己应该做的事，不越级调用。前端按功能模块分目录放置页面组件，API调用统一封装在api目录下。
+[129] Style:Normal | （5）易用性需求：系统界面应简洁明了，操作流程符合用户习惯。列表页面提供搜索和筛选功能，帮助用户快速定位数据。重要操作（如删除）需要弹出确认对话框进行二次确认，防止误操作。操作完成后应有明确的成功或失败提示，使用Element Plus的ElMessage组件在页面顶部展示提示信息。表单提交前应进行前端验证，对必填项、格式等进行检查，减少无效请求。
+[130] Style:Normal | 
+[131] Style:Normal | 
+[132] Style:Heading 1 | 第4章　系统设计
+[133] Style:Heading 2 | 4.1　系统总体架构设计
+[134] Style:Normal | 系统架构的选择对整个项目的开发效率和后续维护都有很大影响。经过对比分析，本系统采用了前后端分离的B/S（Browser/Server）架构。B/S架构的优势是用户不需要安装客户端软件，只要有浏览器就可以使用系统，方便部署和更新。系统在逻辑上分为三个层次：表现层（前端Vue应用）、业务逻辑层（后端Spring Boot服务）和数据层（MySQL数据库和Redis缓存）。
+[135] Style:Normal | 
+[136] Style:Normal | 图4.1　系统总体架构图
+[137] Style:Normal | 系统的请求处理流程大致是这样的：用户在浏览器中进行操作，前端Vue应用将操作转化为HTTP请求，通过Axios发送到后端的Controller层；Controller接收到请求后调用Service层来处理业务逻辑，Service层根据需要调用Mapper层来操作数据库；处理完成后将结果逐层返回，最终以JSON格式响应给前端，前端再将数据渲染到页面上。
+[138] Style:Normal | 选择前后端分离这种架构方式，主要有两个考虑。一个是开发效率，前端和后端可以各自独立开发，互不影响，只要约定好接口格式就行。另一个是部署灵活性，前端可以单独部署到Nginx上，后端也可以独立部署和扩展。
+[139] Style:Heading 2 | 4.2　后端架构设计
+[140] Style:Normal | 后端项目的包结构遵循标准的MVC分层模式，各包的职责如下表所示：
+[141] Style:Normal | 表4.1　后端项目包结构说明
+[142] Style:Normal | 
+[143] Style:Normal | 所有接口采用RESTful风格，返回结果用Result类统一包装，包含code（状态码，200表示成功，其他表示各种错误）、message（提示信息）和data（返回数据）三个字段。接口之间的调用关系遵循严格的分层规范：Controller层不直接操作数据库，而是调用Service层来完成业务逻辑；Service层不处理HTTP请求参数，只关注业务逻辑本身；Mapper层不包含业务逻辑，只负责执行SQL语句。这样的分层方式使得代码职责清晰，后续如果要修改某个模块的功能，只需要改对应层的代码就行，不会影响到其他层。
+[144] Style:Heading 2 | 4.3　前端架构设计
+[145] Style:Normal | 前端项目基于Vue 3 + Vite搭建。前端的路由设计分为两大部分：以"/"开头的路由组用于普通用户的前台页面，以"/admin"开头的路由组用于管理员、教练和工作人员的后台页面。路由守卫中会检查用户是否已登录以及角色权限是否匹配，如果未登录会自动跳转到登录页面，如果角色不匹配则跳转到对应角色的首页。
+[146] Style:Normal | 前台和后台使用了不同的布局组件。前台用的是FrontLayout，包含顶部导航栏和内容区域，导航栏上有首页、商品租赁、教练预约、滑雪课程、场地信息等菜单项。后台用的是MainLayout，采用了左侧边栏加右侧内容区的经典管理后台布局，左侧边栏显示功能菜单，右侧是具体的页面内容。
+[147] Style:Heading 2 | 4.4　业务流程设计
+[148] Style:Normal | 商品租赁的整体业务流程如下：用户首先在商品列表页面浏览可租赁的雪具和装备，选择目标商品后填写租赁时长及数量，随后提交生成订单。在此过程中，系统会自动校验该商品的当前库存是否充足，若库存满足需求则正常生成订单并同步扣减相应库存数量；若库存不足，则提示用户无法完成租赁。当用户使用完毕或到达约定归还时间后，工作人员在后台执行归还确认操作，系统随即将订单状态更新为“已归还”，并自动恢复对应商品的可用库存数量。
+[149] Style:Normal | 
+[150] Style:Normal | 图4.2　商品租赁业务流程图
+[151] Style:Normal | 用户登录的处理流程如下：用户在系统登录界面输入账号和密码后，前端首先进行表单校验，验证各输入项是否为空。校验通过后，前端通过HTTP请求将登录信息发送至后端进行身份验证。后端接收到请求后，查询数据库核实用户名和密码是否匹配，验证通过后生成JWT Token并返回给前端。前端收到Token后将其存储至浏览器本地存储，随后根据用户角色跳转至相应的首页。若后端验证失败（密码错误或用户名不存在），则返回相应错误信息，前端在页面上弹出提示告知用户。
+[152] Style:Normal | 在完成功能模块划分和数据库表结构设计之后，下一步工作是梳理系统中核心业务操作的执行流程，以便在编码阶段具有清晰的开发思路。本节主要针对用户登录和商品租赁两个核心业务流程进行了详细的分析与设计。
+[153] Style:Normal | 
+[154] Style:Normal | 图4.3　用户登录流程图
+[155] Style:Heading 2 | 4.5  数据库设计
+[156] Style:Heading 3 | 4.5.1　概念结构设计
+[157] Style:Normal | 根据需求分析阶段确定的业务功能，对系统涉及的数据进行抽象，识别出主要的实体对象。系统中的核心实体包括：用户（系统的所有使用者，包括管理员、教练、工作人员和普通用户）、商品（统一管理的雪具和装备，既可用于租赁也可用于销售）、教练（滑雪场的教练人员）、课程（教练开设的滑雪培训课程）、场地（滑雪场内的各类场地）。雪场的教练人员）、课程（教练开设的滑雪培训课程）、场地（滑雪场内的各类场地）。此外还有几个关联实体：租赁订单（用户租赁商品时产生的订单记录）、教练预约（用户预约教练的记录）、场地预订（用户预约场地的记录）和课程报名（用户报名课程的记录）。
+[158] Style:Normal | 这些实体之间存在以下主要关系：一个用户可以有多个租赁订单、多个教练预约、多个课程报名记录，即用户与这些订单/预约记录之间是一对多的关系。一个教练可以教授多门课程，同时也可以被多个用户预约，教练与课程之间是一对多关系，教练与用户之间通过教练预约表形成多对多关系。一门课程由一个教练教授，在一个场地上课，课程与教练是多对一关系，课程与场地也是多对一关系。一个租赁订单关联一件商品。
+[159] Style:Normal | 
+[160] Style:Normal | 图4.4　系统E-R关系简图
+[161] Style:Heading 3 | 4.5.2　逻辑结构设计
+[162] Style:Normal | 将概念模型转化为关系模型，系统共设计了9张数据库表。在设计表结构的时候，遵循了几个原则：一是每张表都设置了自增的BIGINT类型主键，方便进行关联查询；二是需要记录时间的字段统一使用DATETIME类型，并在create_time字段设置默认值为CURRENT_TIMESTAMP；三是涉及到金额的字段使用DECIMAL(10，2)类型，避免浮点数精度问题；四是用TINYINT类型来表示状态字段，通过不同的数值表示不同的状态。下面列出主要表的结构：
+[163] Style:Normal | 表4.2　用户表（t_user）结构
+[164] Style:Normal | 续表4.2　用户表（t_user）结构
+[165] Style:Normal | 
+[166] Style:Normal | 表4.3　商品表（t_product）结构
+[167] Style:Normal | 
+[168] Style:Normal | 表4.4　教练表（t_coach）结构
+[169] Style:Normal | 
+[170] Style:Normal | 表4.5　课程表（t_course）结构
+[171] Style:Normal | 
+[172] Style:Normal | 表4.6　场地表（t_venue）结构
+[173] Style:Normal | 表4.7　租赁订单表（t_rental_order）结构
+[174] Style:Normal | 续表4.7　租赁订单表（t_rental_order）结构
+[175] Style:Normal | 除上述6张主要表外，系统还包括3张关联业务表。教练预约表（t_coach_booking）记录用户对教练的预约信息，包含用户ID、教练ID、预约日期、时间段、费用金额和预约状态等字段。场地预订表（t_venue_booking）记录用户对场地的预订信息，结构与教练预约表类似。课程报名表（t_course_enrollment）记录学员的课程报名数据，包含用户ID、课程ID、报名时间和报名状态等字段。这三张表都通过外键关联到用户表和对应的业务主表上。
+[176] Style:Heading 2 | 4.6　接口设计
+[177] Style:Normal | 系统后端采用RESTful风格设计API接口。RESTful的核心思想是用HTTP方法来表示操作类型：GET用于查询、POST用于新增、PUT用于修改、DELETE用于删除。每个接口的URL路径对应一个资源，通过不同的HTTP方法对同一资源进行不同的操作。后端共定义了约50个API接口，覆盖了用户、商品、教练、课程、场地、租赁订单和统计等各模块的业务需求。主要接口列表如下：
+[178] Style:Normal | 表4.8　主要API接口列表
+[179] Style:Normal | 
+[180] Style:Heading 1 | 第5章　系统实现
+[181] Style:Heading 2 | 5.1　管理员模块的实现
+[182] Style:Normal | 管理员是系统的最高权限角色，负责系统整体的数据管理和运营配置。在介绍管理员的具体功能之前，先简要说明系统的开发环境。在正式开始编码之前，需要先搭建好开发环境。后端使用IntelliJ IDEA作为开发工具，通过Maven管理项目依赖。项目创建时使用Spring Initializr初始化，勾选了Web、MyBatis、MySQL Driver、Redis等Starter依赖。前端使用Visual Studio Code编辑器，通过npm管理前端依赖包。具体的开发环境配置如下表所示：
+[183] Style:Normal | 表5.1　开发环境配置
+[184] Style:Heading 3 | 5.1.1　商品管理功能
+[185] Style:Normal | 商品管理模块是系统的核心业务模块之一，统一管理滑雪场的雪具和装备信息。在本系统的设计中，雪具（如滑雪板、雪鞋、头盔等）和装备（如护具、雪镜等）统一放在一张商品表中管理，通过category字段区分是雪具、装备还是配件。这种设计方案的优势在于数据结构更简洁，前后端的代码也不用分开写两套。
+[186] Style:Normal | 用户端以卡片形式展示可租赁的商品，每张卡片显示商品图片、名称、品牌、租赁价格等信息。用户选择商品后指定租赁时间和数量，系统自动计算租赁费用并生成订单。订单创建时系统自动扣减商品的可用数量，归还时再加回来。租赁订单有待支付、使用中、已归还、已取消四种状态，工作人员可以在后台管理所有的租赁订单，进行归还确认和取消操作。
+[187] Style:Normal | 管理员和工作人员可以在后台的商品管理页面对商品进行增删改查操作。页面顶部有搜索区域，可以按商品名称和分类进行筛选查询。列表使用了Element Plus的el-table组件来展示数据，支持分页功能，每页显示10条记录。点击“增”钮会弹出对话框让用户填写商品信息，包括商品编号、名称、分类、品牌、租赁价格、销售价格、库存数量等字段。编辑操作也是弹出同样的对话框，只是自动填入了已有的数据。删除操作采用逻辑删除，通过设置is_deleted字段为1来标记。后端分页查询接口代码如下：
+[188] Style:Normal | 
+[189] Style:Normal | 图5.1　商品管理页面
+[190] Style:Normal | 核心代码：
+[191] Style:Normal | @GetMapping("/page/condition")
+[192] Style:Normal | public Result<PageResult<Product>> getByCondition(
+[193] Style:Normal |         @RequestParam(defaultValue = "1")
+[194] Style:Normal |             Integer page,
+[195] Style:Normal |         @RequestParam(defaultValue = "10")
+[196] Style:Normal |             Integer pageSize,
+[197] Style:Normal |         @RequestParam(required = false)
+[198] Style:Normal |             String name,
+[199] Style:Normal |         @RequestParam(required = false)
+[200] Style:Normal |             String category) {
+[201] Style:Normal |     PageResult<Product> result =
+[202] Style:Normal |         productService.pageByCondition(
+[203] Style:Normal |             page, pageSize, name, category);
+[204] Style:Normal |     if (result.getList() != null) {
+[205] Style:Normal |         result.getList().forEach(p -> {
+[206] Style:Normal |             p.setPassword(null);
+[207] Style:Normal |         });
+[208] Style:Normal |     }
+[209] Style:Normal |     return Result.success(result);
+[210] Style:Normal | }
+[211] Style:Heading 3 | 5.1.2　数据统计功能
+[212] Style:Normal | 数据统计模块是管理员了解雪场整体运营状况的重要工具，也是做经营决策的数据支撑。这个模块包含两个主要页面：Dashboard看板页面和数据可视化分析页面。管理员登录后默认进入的就是Dashboard看板页面。
+[213] Style:Normal | Dashboard看板页面展示了系统的核心运营数据概览，包括总用户数、今日新增用户数、总订单数、今日订单数、总收入金额、今日收入等关键指标。这些数据通过后端的DashboardController接口获取，接口内部对多张业务表进行聚合查询和统计。为了避免每次访问都执行复杂的数据库查询，统计结果会缓存到Redis中，设置了5分钟的过期时间。
+[214] Style:Normal | 数据可视化分析页面使用了ECharts图表库来展示各种统计图表。主要包括：收入趋势折线图，展示近30天的每日收入变化趋势；订单类型分布饼图，展示租赁订单、教练预约和课程报名各占的比例；热门商品排行柱状图，展示租赁次数最多的商品。前端使用Vue的onMounted生命周期钩子在页面加载时请求数据，然后调用ECharts的setOption方法渲染图表。
+[215] Style:Normal | 
+
+[216] Style:Normal | 图5.2　数据统计页面
+[217] Style:Normal | 核心代码：
+[218] Style:Normal | @GetMapping("/overview")
+[219] Style:Normal | public Result<Map<String, Object>>
+[220] Style:Normal |         getOverview() {
+[221] Style:Normal |     Map<String, Object> overview =
+[222] Style:Normal |         new HashMap<>();
+[223] Style:Normal |     List<User> users =
+[224] Style:Normal |         userMapper.selectAll();
+[225] Style:Normal |     long totalUsers = users.stream()
+[226] Style:Normal |         .filter(u -> "user"
+[227] Style:Normal |             .equals(u.getRole()))
+[228] Style:Normal |         .count();
+[229] Style:Normal |     overview.put("totalUsers", totalUsers);
+[230] Style:Normal |     List<RentalOrder> orders =
+[231] Style:Normal |         rentalOrderMapper.selectAll();
+[232] Style:Normal |     long todayOrders = orders.stream()
+[233] Style:Normal |         .filter(o -> isToday(
+[234] Style:Normal |             o.getCreateTime()))
+[235] Style:Normal |         .count();
+[236] Style:Normal |     overview.put("todayOrders",
+[237] Style:Normal |         todayOrders);
+[238] Style:Normal |     return Result.success(overview);
+[239] Style:Normal | }
+[240] Style:Heading 2 | 5.2　用户模块的实现
+[241] Style:Normal | 普通用户是系统的最终使用者，通过前台页面访问各项服务功能。用户登录是系统的入口功能。前端登录页面采用了左右分栏的布局，左侧展示系统名称和特色功能介绍，右侧是登录和注册的表单区域，支持在登录和注册两个Tab页之间切换。登录表单中用到了Element Plus的el-form组件，配合el-input来收集用户名和密码，并使用了表单验证规则来限制输入。
+[242] Style:Normal | 登录的具体流程如下：用户输入用户名和密码后点击登录按钮，前端先对表单进行校验（用户名和密码不能为空），校验通过后通过Axios向后端发送POST请求。后端UserController接收到请求后，调用UserService验证用户名和密码，密码验证使用BCryptPasswordEncoder进行比对。验证通过后生成JWT Token，连同用户信息一起返回给前端。前端收到数据后将Token和用户信息保存到Pinia Store和LocalStorage中，然后根据用户角色进行页面跳转：普通用户跳转到前台首页“/home”，管理员、教练和工作人员跳转到后台首页“admin/dashboard”后端登录接口核心代码如下：
+[243] Style:Normal | 
+[244] Style:Normal | 图5.3　用户登录页面
+[245] Style:Normal | 核心代码：
+[246] Style:Normal | public static String generateToken(
+[247] Style:Normal |         Long userId, String username,
+[248] Style:Normal |         String role) {
+[249] Style:Normal |     Map<String, Object> claims = new HashMap<>();
+[250] Style:Normal |     claims.put("userId", userId);
+[251] Style:Normal |     claims.put("username", username);
+[252] Style:Normal |     claims.put("role", role);
+[253] Style:Normal |     Date issuedAt = new Date();
+[254] Style:Normal |     long expireMillis = 7 * 24 * 3600 * 1000L;
+[255] Style:Normal |     Date expiration = new Date(
+[256] Style:Normal |         issuedAt.getTime() + expireMillis);
+[257] Style:Normal |     return Jwts.builder()
+[258] Style:Normal |         .setClaims(claims)
+[259] Style:Normal |         .setSubject(username)
+[260] Style:Normal |         .setIssuedAt(issuedAt)
+[261] Style:Normal |         .setExpiration(expiration)
+[262] Style:Normal |         .signWith(getSecretKey(),
+[263] Style:Normal |             SignatureAlgorithm.HS256)
+[264] Style:Normal |         .compact();
+[265] Style:Normal | }
+[266] Style:Heading 2 | 5.3　工作人员模块的实现
+[267] Style:Normal | 课程管理模块包含课程的发布管理和学员的报名功能。管理员在后台可以发布新课程，需要填写课程名称、类型（初级入门/中级进阶/高级提升）、授课教练、开课日期、上课时间、场地、最大学员数和价格等信息。添加课程时，前端会同时请求教练列表和场地列表作为下拉选项，管理员可以直接选择而无需手动输入ID。用户端的课程页面展示所有“报名中”的课程，用户点击报名后系统会检查报名人数是否已满，未满则允许报名并将当前报名人数加1。
+[268] Style:Normal | 场地管理比较简单。管理员可以在后台录入和编辑场地信息，包括场地名称、类型、难度等级和容纳人数。系统预置了初级雪道、中级雪道、高级雪道和自由式公园等场地数据。雪道类型的场地包含在门票里不用另外收费，自由式公园则需要额外收费。用户可以查看各场地的状态信息，对需要付费的场地进行在线预约。
+[269] Style:Normal | 在工作人员的日常操作中，归还处理是最为频繁的业务操作之一。当顾客归还租赁的雪具时，工作人员需在系统的订单列表页面中查找对应的租赁订单，点击“确认归还”按钮。系统接收到归还确认操作后，将该订单状态由“使用中”更新为“已归还”，同时自动恢复对应商品的可用库存数量。以下为后端处理归还操作的核心代码：
+[270] Style:Normal | 
+[271] Style:Normal | 图5.4　工作人员后台页面
+[272] Style:Normal | 核心代码：
+[273] Style:Normal | @PutMapping("/{id}/return")
+[274] Style:Normal | public Result<Boolean> returnEquipment(
+[275] Style:Normal |         @PathVariable Long id) {
+[276] Style:Normal |     RentalOrder order =
+[277] Style:Normal |         rentalOrderService.getById(id);
+[278] Style:Normal |     if (order == null) {
+[279] Style:Normal |         return Result.error("订单不存在");
+[280] Style:Normal |     }
+[281] Style:Normal |     if (order.getOrderStatus() != 1) {
+[282] Style:Normal |         return Result.error(
+[283] Style:Normal |             "当前状态不允许归还");
+[284] Style:Normal |     }
+[285] Style:Normal |     order.setOrderStatus(2);
+[286] Style:Normal |     order.setRentalEndTime(new Date());
+[287] Style:Normal |     Product product = productService
+[288] Style:Normal |         .getById(order.getProductId());
+[289] Style:Normal |     product.setAvailableQuantity(
+[290] Style:Normal |         product.getAvailableQuantity() + 1);
+[291] Style:Normal |     productService.update(product);
+[292] Style:Normal |     rentalOrderService.update(order);
+[293] Style:Normal |     return Result.success(true);
+[294] Style:Normal | }
+[295] Style:Normal | 工作人员后台采用左侧导航加右侧内容区域的布局方式，菜单项根据角色权限进行了精简。商品管理页面提供按名称和分类检索的功能，租赁订单页面支持按状态筛选并可直接执行归还操作。
+[296] Style:Normal | 工作人员的主要操作权限涵盖租赁订单管理、商品信息查看、场地状态管理等方面。
+[297] Style:Normal | 工作人员在系统中主要负责前台业务操作，登录后台后可使用商品信息管理、租赁订单处理及场地状态查看等功能。
+[298] Style:Normal | 
+[299] Style:Normal | 图5.5	工作人员模块的实现	
+[300] Style:Normal | 核心代码：
+[301] Style:Normal | @GetMapping("/page/condition")
+[302] Style:Normal | public Result<PageResult<RentalOrder>>
+[303] Style:Normal |         pageByCondition(
+[304] Style:Normal |         @RequestParam(required = false)
+[305] Style:Normal |             String orderNo,
+[306] Style:Normal |         @RequestParam(required = false)
+[307] Style:Normal |             Integer status,
+[308] Style:Normal |         @RequestParam(defaultValue = "1")
+[309] Style:Normal |             Integer pageNum,
+[310] Style:Normal |         @RequestParam(defaultValue = "10")
+[311] Style:Normal |             Integer pageSize) {
+[312] Style:Normal |     PageResult<RentalOrder> result =
+[313] Style:Normal |         rentalOrderService.pageByCondition(
+[314] Style:Normal |             orderNo, null, null,
+[315] Style:Normal |             status, pageNum, pageSize);
+[316] Style:Normal |     return Result.success(result);
+[317] Style:Normal | }
+[318] Style:Normal | 
+[319] Style:Heading 2 | 5.4　教练模块的实现
+[320] Style:Normal | 教练预约涉及管理员、教练和用户三个角色。管理员在后台维护教练的基本信息，包括姓名、等级、专长、课时费等。教练列表页面支持按姓名、等级和状态进行筛选查询。
+[321] Style:Normal | 用户端的教练预约页面展示了所有在职教练的信息。用户选择教练后，需要指定预约日期、开始时间和结束时间，系统根据教练的课时费和预约时长自动计算费用。提交预约后状态为“待确认”。教练登录后可在“员预约”面查看并确认或取消预约。后端通过coach_id进行数据隔离，确保每个教练只能看到自己的预约数据：
+[322] Style:Normal | 
+[323] Style:Normal | 
+图5.6　教练预约页面
+[324] Style:Normal | 
+[325] Style:Normal | 核心代码：
+[326] Style:Normal | @GetMapping("/my-bookings")
+[327] Style:Normal | public Result<List<CoachBooking>>
+[328] Style:Normal |         getMyBookings() {
+[329] Style:Normal |     Long userId =
+[330] Style:Normal |         SecurityUtils.getCurrentUserId();
+[331] Style:Normal |     Coach coach =
+[332] Style:Normal |         coachService.getByUserId(userId);
+[333] Style:Normal |     if (coach == null) {
+[334] Style:Normal |         return Result.error(
+[335] Style:Normal |             "教练信息不存在");
+[336] Style:Normal |     }
+[337] Style:Normal |     List<CoachBooking> bookings =
+[338] Style:Normal |         coachBookingService
+[339] Style:Normal |             .getByCoachId(coach.getId());
+[340] Style:Normal |     bookings.sort((a, b) ->
+[341] Style:Normal |         b.getBookingDate().compareTo(
+[342] Style:Normal |             a.getBookingDate()));
+[343] Style:Normal |     return Result.success(bookings);
+[344] Style:Normal | }
+[345] Style:Heading 2 | 5.5　系统安全实现
+[346] Style:Normal | 系统的安全控制主要体现在以下几个方面：
+[347] Style:Normal | 密码加密存储：用户密码在注册时通过BCryptPasswordEncoder进行加密后才保存到数据库中，BCrypt是一种单向加密算法，即使数据库被泄露也无法直接获取用户的明文密码。
+[348] Style:Normal | JWT Token认证：系统配置了JwtAuthenticationFilter过滤器，对每个HTTP请求进行Token的解析和验证。前端在每次请求时会在Authorization请求头中携带Bearer Token，后端过滤器从中提取Token并验证，验证通过后将用户信息设置到Security上下文中。
+[349] Style:Normal | 前端路由守卫：前端在路由配置中使用了beforeEach全局守卫，检查目标路由是否需要登录权限以及当前用户的角色是否有权限访问。如果用户未登录会被重定向到登录页面；如果角色不匹配会被重定向到自己角色对应的首页。
+[350] Style:Normal | 跨域配置：由于前后端分别运行在不同的端口（前端5173，后端8080），需要处理跨域请求的问题。后端通过CorsConfig配置类来允许跨域访问。
+[351] Style:Normal | 前端路由守卫核心逻辑：
+[352] Style:Normal | 核心代码：
+[353] Style:Normal | router.beforeEach((to, from, next) => {
+[354] Style:Normal |   const userStore = useUserStore()
+[355] Style:Normal |   const token = userStore.token
+[356] Style:Normal |   const role = userStore.userInfo?.role
+[357] Style:Normal |   if (to.meta.requiresAuth && !token) {
+[358] Style:Normal |     ElMessage.warning('请先登录')
+[359] Style:Normal |     next('/login')
+[360] Style:Normal |     return
+[361] Style:Normal |   }
+[362] Style:Normal |   if (to.meta.roles &&
+[363] Style:Normal |       !to.meta.roles.includes(role)) {
+[364] Style:Normal |     ElMessage.error('无权限访问')
+[365] Style:Normal |     const target = role === 'user'
+[366] Style:Normal |       ? '/home'
+[367] Style:Normal |       : '/admin/dashboard'
+[368] Style:Normal |     next(target)
+[369] Style:Normal |     return
+[370] Style:Normal |   }
+[371] Style:Heading 1 | 第6章　系统测试
+[372] Style:Heading 2 | 6.1　测试环境
+[373] Style:Normal | 系统测试环境如下：
+[374] Style:Normal | 表6.1　测试环境
+[375] Style:Normal | 
+[376] Style:Normal | 测试账号：管理员admin，教练coach1-coach5，工作人员staff1，普通用户testuser（密码均为123456）。测试数据方面，系统中预置了20条商品数据（包含单板、双板、雪鞋、头盔、护具等类型）、5名教练数据、8门课程数据和6个场地数据。测试时还额外注册了若干普通用户账号来模拟多用户场景。
+[377] Style:Heading 2 | 6.2　功能测试
+[378] Style:Normal | 功能测试采用手工测试的方式，按各模块的业务流程，使用不同角色的账号分别登录系统，模拟用户实际操作来验证各项功能是否符合需求规格。测试过程中对每个功能点编写了测试用例，记录测试步骤、预期结果和实际结果。
+[379] Style:Heading 3 | 6.2.1　用户模块测试
+[380] Style:Normal | 表6.2　用户模块测试用例
+[381] Style:Normal | 续表6.2　用户模块测试用例
+[382] Style:Normal | 
+[383] Style:Heading 3 | 6.2.2　商品租赁模块测试
+[384] Style:Normal | 表6.3　商品租赁模块测试用例
+[385] Style:Normal | 
+[386] Style:Heading 3 | 6.2.3　教练预约与课程模块测试
+[387] Style:Normal | 表6.4　教练预约与课程模块测试用例
+[388] Style:Normal | 续表6.4　教练预约与课程模块测试用例
+[389] Style:Normal | 
+[390] Style:Heading 2 | 6.3　性能测试
+[391] Style:Normal | 除了功能测试之外，还对系统的主要接口进行了简单的性能测试。测试方法是在单用户场景下，使用Chrome浏览器的开发者工具中的Network面板来记录每个接口从发起请求到收到响应的耗时，每个接口测试5次取平均值。测试结果如下表所示：
+[392] Style:Normal | 表6.5　接口响应时间测试
+[393] Style:Normal | 
+[394] Style:Normal | 从测试结果来看，所有接口的响应时间均在200ms左右，远低于2秒的标准，系统性能表现良好。统计概览接口由于需要做多表聚合查询，响应时间相对较长，但通过Redis缓存可以进一步优化。
+[395] Style:Heading 2 | 6.4　测试总结
+[396] Style:Normal | 经过以上测试验证，系统的主要功能均已正常运行，包括用户登录、商品租赁、教练预约、课程报名、场地预约、数据统计等核心业务流程均通过测试。接口响应时间均在200ms以内，满足性能要求。
+[397] Style:Normal | 其一，商品管理页面的状态字段中，后端返回的是数字编码（0表示下架、1表示上架），前端未做转换而直接显示原始数字，导致用户无法理解其含义，后通过在前端增加状态映射予以修复。其二，租赁订单金额存在浮点精度问题，偶尔出现多位小数的情况，后在前端使用toFixed(2)进行格式化处理。其三，教练预约的时间段校验不够严格，未限制用户选择已过去的时间，后在前端为日期选择器添加disabledDate属性加以约束。以上均属非核心缺陷，发现后已及时修复。
+[398] Style:Normal | 此外，在并发控制方面仍存在待优化之处。当多个用户同时租赁同一件商品时，存在库存出现负数的风险，其根本原因在于扣减库存时未引入并发控制机制。应在数据库层面采用乐观锁等手段加以处理。鉴于本系统定位为中小型雪场使用，并发量相对有限，该问题在当前阶段影响较小，但随着用户规模扩大，该部分仍有优化的必要。
+[399] Style:Normal | 综上所述，系统基本达到了预期的功能目标，各项核心业务流程均可正常运行。
+[400] Style:Heading 1 | 第7章　结论
+[401] Style:Heading 2 | 7.1　总结
+[402] Style:Normal | 本文设计并实现了一个基于Spring Boot的飞跃滑雪场管理系统。后端采用Spring Boot 2.7结合MyBatis操作MySQL数据库，引入Redis进行数据缓存，JWT实现身份认证；前端采用Vue 3和Element Plus构建页面，ECharts绘制数据图表。整个项目采用前后端分离的架构进行开发。
+[403] Style:Normal | 系统按角色分为管理员、教练、工作人员和普通用户四种，实现了用户管理、商品管理、教练预约、课程管理、场地管理和数据统计等功能模块。数据库共设计9张数据表，后端编写了多个Controller接口，前端开发了30余个页面组件。经测试各项功能运行正常，能够满足中小型雪场的日常管理需求。
+[404] Style:Normal | 在本项目的开发过程中，收获颇多。此前学习Spring Boot和Vue时多为独立的小型练习，本次将其整合于完整项目中，才深刻体会到前后端联调、接口对接等环节的复杂性。例如前端页面逻辑与后端数据格式不一致时的处理方式、分页查询参数的传递方式、跨域问题的解决方案等，这些在课程中难以遇到。当然，系统仍有诸多可改进之处。
+[405] Style:Heading 2 | 7.2　展望
+[406] Style:Normal | 系统当前的功能基本都实现了，但受时间和个人能力所限，部分功能仍有优化空间：
+[407] Style:Normal | （1）移动端适配：目前系统虽然使用了响应式设计，但在手机上的使用体验还不够理想，后续可以考虑开发专门的微信小程序或移动端App，让用户随时随地都能查看和管理。
+[408] Style:Normal | （2）支付功能集成：当前系统的支付功能只做了状态模拟，没有对接真实的支付接口。后续可以集成微信支付或支付宝等第三方支付平台，实现线上支付。
+[409] Style:Normal | （3）消息通知功能：可以增加短信通知或站内信功能，在预约确认、订单状态变更等时机自动通知用户，提升用户体验。
+[410] Style:Normal | （4）权限细化：目前的权限控制比较粗，只做到了角色级别，后续可以引入更细粒度的权限管理，比如按菜单和按钮级别进行控制。
+[411] Style:Heading 1 | 参考文献
+[412] Style:Normal | [1]国务院办公厅.关于以冰雪运动高质量发展激发冰雪经济活力的若干意见[Z].国办发〔2024〕49号, 2024.
+[413] Style:Normal | [2]中共中央办公厅,国务院办公厅.关于构建更高水平的全民健身公共服务体系的意见[Z]. 2022.
+[414] Style:Normal | [3] Craig Walls. Spring实战(第6版)[M].张卫滨,吴国浩,译.北京:人民邮电出版社, 2022.
+[415] Style:Normal | [4]杨开振.深入浅出Spring Boot 3.x[M].北京:人民邮电出版社, 2024.
+[416] Style:Normal | [5]霍春阳. Vue.js设计与实现[M].北京:人民邮电出版社, 2022.
+[417] Style:Normal | [6] R. Shah. Microservices with Spring Boot: Simplifying Distributed Systems[J]. International Journal For Multidisciplinary Research, 2024, 6(5): 1-15.
+[418] Style:Normal | [7] J. Troya, D. Bravo. Comparative Analysis of the Efficiency of Data Persistence Frameworks: Hibernate and MyBatis[J]. Universidad Ciencia y Tecnologia, 2022, 26(115): 92-101.
+[419] Style:Normal | [8] Z. Wang, H. Liu. Research on Performance Optimization of MySQL Database[C]. IEEE International Conference on Software Engineering and Service Science, 2023: 245-249.
+[420] Style:Normal | [9]王珊,杜小勇,陈红.数据库系统概论(第6版)[M].北京:高等教育出版社, 2023.
+[421] Style:Normal | [10]李子骅. Redis入门指南(第3版)[M].北京:人民邮电出版社, 2021.
+[422] Style:Normal | [11] M. Suhartanto, A. Amalia. Performance and Security Comparison of JSON Web Tokens and Platform Agnostic Security Tokens on RESTful APIs[C]. IEEE International Conference on Informatics and Computing, 2023: 1-6.
+[423] Style:Normal | [12] L. Li, Y. Zhang. Design and Implementation of Epidemic Big Data Visualization Platform Based on Vue and ECharts[C]. IEEE International Conference on Data Science, 2023: 156-161.
+[424] Style:Normal | [13] A. Nurhakim, M. Ahsan. Quantitative Study on Virtual DOM Diff Performance with Different Key Attribute Usage: A Case of Vue.js[J]. Journal of Information and Technology Management, 2025, 7(29): 125-137.
+[425] Style:Normal | [14] D. Li, H. Mei, Y. Shen, et al. ECharts: A Declarative Framework for Rapid Construction of Web-based Visualization[J]. Visual Informatics, 2022, 2(2): 136-146.
+[426] Style:Normal | [15]谢希仁.计算机网络(第8版)[M].北京:电子工业出版社, 2021.
+[427] Style:Normal | 
+[428] Style:Normal | 
+[429] Style:Heading 1 | 致　　谢
+[430] Style:Normal | 不知不觉大学四年就这么过去了，论文写到这里也快结束了，心里还是有不少想要感谢的人。
+[431] Style:Normal | 首先要感谢我的指导老师，从选题开始就一直在帮我理清思路，开发过程中遇到技术难题也会耐心地给我指导和建议。论文修改的时候老师更是一版一版地仔细审阅，从内容到格式都帮我把关，提出了很多宝贵的修改意见。没有老师的悉心指导，这篇论文是无法顺利完成的，真的很感谢老师这一年来的辛苦付出。
+[432] Style:Normal | 感谢大学四年来所有教过我的老师们，正是你们在课堂上的教导，让我从一个对编程一窍不通的小白，逐渐掌握了Java编程、数据库设计、Web开发等专业知识和技能。特别是数据库原理、软件工程和Web开发这几门课的老师，你们讲的知识在这次毕设中都用上了。
+[433] Style:Normal | 还有我的同学和朋友们，写代码卡住的时候经常找他们讨论，有时候自己调了半天的Bug，别人看一眼就发现问题所在了。大家一起熬夜赶项目的日子虽然辛苦，但现在回想起来也挺怀念的。
+[434] Style:Normal | 最后要感谢我的家人，是你们一直以来在背后的支持和鼓励，让我能够安心地完成学业。谢谢你们。
+[435] Style:Normal | 
+[436] Style:Normal | 

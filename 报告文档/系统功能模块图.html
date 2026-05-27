@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>功能模块图</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "SimSun", serif; background: #fff; padding: 30px; }
+        .container { position: relative; width: 680px; height: 280px; margin: 0 auto; }
+        .box { position: absolute; border: 1px solid #000; padding: 4px 12px; font-size: 12px; background: #fff; white-space: nowrap; }
+        .vbox { position: absolute; border: 1px solid #000; width: 22px; height: 70px; font-size: 12px; background: #fff; writing-mode: vertical-rl; text-orientation: upright; display: flex; align-items: center; justify-content: center; letter-spacing: 1px; }
+        .line { position: absolute; background: #000; }
+        .caption { text-align: center; margin-top: 300px; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 顶层节点 -->
+    <div class="box" style="left:245px; top:0;">飞跃滑雪场管理系统</div>
+    <div class="line" style="left:340px; top:24px; width:1px; height:20px;"></div>
+    <div class="line" style="left:130px; top:44px; width:420px; height:1px;"></div>
+    
+    <!-- 第一层三个竖线 -->
+    <div class="line" style="left:130px; top:44px; width:1px; height:20px;"></div>
+    <div class="line" style="left:340px; top:44px; width:1px; height:20px;"></div>
+    <div class="line" style="left:550px; top:44px; width:1px; height:20px;"></div>
+    
+    <!-- 第一层三个模块 -->
+    <div class="box" style="left:85px; top:64px;">管理员模块</div>
+    <div class="box" style="left:305px; top:64px;">教练模块</div>
+    <div class="box" style="left:495px; top:64px;">前台用户模块</div>
+    
+    <!-- 管理员模块竖线和横线 -->
+    <div class="line" style="left:130px; top:88px; width:1px; height:20px;"></div>
+    <div class="line" style="left:20px; top:108px; width:220px; height:1px;"></div>
+    
+    <!-- 教练模块竖线和横线 -->
+    <div class="line" style="left:340px; top:88px; width:1px; height:20px;"></div>
+    <div class="line" style="left:280px; top:108px; width:120px; height:1px;"></div>
+    
+    <!-- 前台用户模块竖线和横线 -->
+    <div class="line" style="left:550px; top:88px; width:1px; height:20px;"></div>
+    <div class="line" style="left:430px; top:108px; width:240px; height:1px;"></div>
+    
+    <!-- 管理员模块下的竖线 -->
+    <div class="line" style="left:20px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:44px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:68px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:92px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:116px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:140px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:164px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:188px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:212px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:240px; top:108px; width:1px; height:15px;"></div>
+    
+    <!-- 管理员模块下的功能 -->
+    <div class="vbox" style="left:9px; top:123px;">首页</div>
+    <div class="vbox" style="left:33px; top:123px;">用户管理</div>
+    <div class="vbox" style="left:57px; top:123px;">雪具管理</div>
+    <div class="vbox" style="left:81px; top:123px;">租赁订单</div>
+    <div class="vbox" style="left:105px; top:123px;">教练管理</div>
+    <div class="vbox" style="left:129px; top:123px;">预约管理</div>
+    <div class="vbox" style="left:153px; top:123px;">商品管理</div>
+    <div class="vbox" style="left:177px; top:123px;">课程管理</div>
+    <div class="vbox" style="left:201px; top:123px;">场地管理</div>
+    <div class="vbox" style="left:229px; top:123px;">数据统计</div>
+    
+    <!-- 教练模块下的竖线 -->
+    <div class="line" style="left:280px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:320px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:360px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:400px; top:108px; width:1px; height:15px;"></div>
+    
+    <!-- 教练模块下的功能 -->
+    <div class="vbox" style="left:269px; top:123px;">首页</div>
+    <div class="vbox" style="left:309px; top:123px;">我的课程</div>
+    <div class="vbox" style="left:349px; top:123px;">学员预约</div>
+    <div class="vbox" style="left:389px; top:123px;">个人中心</div>
+    
+    <!-- 前台用户模块下的竖线 -->
+    <div class="line" style="left:430px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:460px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:490px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:520px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:550px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:580px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:610px; top:108px; width:1px; height:15px;"></div>
+    <div class="line" style="left:670px; top:108px; width:1px; height:15px;"></div>
+    
+    <!-- 前台用户模块下的功能 -->
+    <div class="vbox" style="left:419px; top:123px;">首页</div>
+    <div class="vbox" style="left:449px; top:123px;">雪具租赁</div>
+    <div class="vbox" style="left:479px; top:123px;">教练预约</div>
+    <div class="vbox" style="left:509px; top:123px;">装备商城</div>
+    <div class="vbox" style="left:539px; top:123px;">滑雪课程</div>
+    <div class="vbox" style="left:569px; top:123px;">场地预约</div>
+    <div class="vbox" style="left:599px; top:123px;">我的订单</div>
+    <div class="vbox" style="left:659px; top:123px;">个人中心</div>
+</div>
+<div class="caption">图 1.1 功能模块图</div>
+</body>
+</html>

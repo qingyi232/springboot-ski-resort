@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ski.resort.mapper.VenueBookingMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ski.resort.entity.VenueBooking">
+        <id column="id" property="id" />
+        <result column="booking_no" property="bookingNo" />
+        <result column="venue_id" property="venueId" />
+        <result column="venue_name" property="venueName" />
+        <result column="venue_image" property="venueImage" />
+        <result column="venue_description" property="venueDescription" />
+        <result column="venue_type" property="venueType" />
+        <result column="venue_difficulty" property="venueDifficulty" />
+        <result column="venue_capacity" property="venueCapacity" />
+        <result column="people_count" property="peopleCount" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="booking_date" property="bookingDate" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="hours" property="hours" />
+        <result column="rental_price" property="rentalPrice" />
+        <result column="total_amount" property="totalAmount" />
+        <result column="status" property="status" />
+        <result column="payment_status" property="paymentStatus" />
+        <result column="payment_time" property="paymentTime" />
+        <result column="payment_method" property="paymentMethod" />
+        <result column="cancel_reason" property="cancelReason" />
+        <result column="cancel_time" property="cancelTime" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, booking_no, venue_id, venue_name, people_count, user_id, user_name, booking_date, start_time, end_time, hours, rental_price, total_amount, status, payment_status, payment_time, payment_method, cancel_reason, cancel_time, remark, create_time, update_time, is_deleted
+    </sql>
+
+    <!-- 查询所有预订 -->
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+            vb.id, vb.booking_no, vb.venue_id, vb.venue_name, vb.people_count,
+            vb.user_id, vb.user_name, vb.booking_date,
+            vb.start_time, vb.end_time, vb.hours,
+            vb.rental_price, vb.total_amount, vb.status,
+            vb.payment_status, vb.payment_time, vb.payment_method,
+            vb.cancel_reason, vb.cancel_time, vb.remark,
+            vb.create_time, vb.update_time, vb.is_deleted,
+            v.venue_type as venue_type,
+            v.difficulty_level as venue_difficulty,
+            v.image_url as venue_image,
+            v.max_capacity as venue_capacity
+        FROM t_venue_booking vb
+        LEFT JOIN t_venue v ON vb.venue_id = v.id AND v.is_deleted = 0
+        WHERE vb.is_deleted = 0
+        ORDER BY vb.create_time DESC
+    </select>
+
+    <!-- 根据ID查询预订 -->
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT
+            vb.id, vb.booking_no, vb.venue_id, vb.venue_name, vb.people_count,
+            vb.user_id, vb.user_name, vb.booking_date,
+            vb.start_time, vb.end_time, vb.hours,
+            vb.rental_price, vb.total_amount, vb.status,
+            vb.payment_status, vb.payment_time, vb.payment_method,
+            vb.cancel_reason, vb.cancel_time, vb.remark,
+            vb.create_time, vb.update_time, vb.is_deleted,
+            v.venue_type as venue_type,
+            v.difficulty_level as venue_difficulty,
+            v.image_url as venue_image,
+            v.max_capacity as venue_capacity
+        FROM t_venue_booking vb
+        LEFT JOIN t_venue v ON vb.venue_id = v.id AND v.is_deleted = 0
+        WHERE vb.id = #{id} AND vb.is_deleted = 0
+    </select>
+
+    <!-- 根据用户ID查询预订列表 -->
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT
+            vb.id, vb.booking_no, vb.venue_id, vb.venue_name, 
+            vb.user_id, vb.user_name, vb.booking_date, 
+            vb.start_time, vb.end_time, vb.hours, 
+            vb.rental_price, vb.total_amount, vb.status, 
+            vb.payment_status, vb.payment_time, vb.payment_method, 
+            vb.cancel_reason, vb.cancel_time, vb.remark, 
+            vb.create_time, vb.update_time, vb.is_deleted,
+            vb.people_count,
+            v.venue_type as venue_type,
+            v.image_url as venue_image,
+            v.description as venue_description,
+            v.difficulty_level as venue_difficulty,
+            v.max_capacity as venue_capacity
+        FROM t_venue_booking vb
+        LEFT JOIN t_venue v ON vb.venue_id = v.id AND v.is_deleted = 0
+        WHERE vb.user_id = #{userId} AND vb.is_deleted = 0
+        ORDER BY vb.create_time DESC
+    </select>
+
+    <!-- 根据场地ID查询预订列表 -->
+    <select id="selectByVenueId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_venue_booking
+        WHERE venue_id = #{venueId} AND is_deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 插入预订 -->
+    <insert id="insert" parameterType="com.ski.resort.entity.VenueBooking" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_venue_booking (
+            booking_no, venue_id, venue_name, people_count, user_id, user_name, booking_date, start_time, end_time, hours, rental_price, total_amount, status, payment_status, remark, create_time, update_time
+        ) VALUES (
+            #{bookingNo}, #{venueId}, #{venueName}, #{peopleCount}, #{userId}, #{userName}, #{bookingDate}, #{startTime}, #{endTime}, #{hours}, #{rentalPrice}, #{totalAmount}, #{status}, #{paymentStatus}, #{remark}, NOW(), NOW()
+        )
+    </insert>
+
+    <!-- 更新预订 -->
+    <update id="update" parameterType="com.ski.resort.entity.VenueBooking">
+        UPDATE t_venue_booking
+        SET
+            booking_date = #{bookingDate},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            hours = #{hours},
+            people_count = #{peopleCount},
+            total_amount = #{totalAmount},
+            status = #{status},
+            payment_status = #{paymentStatus},
+            payment_time = #{paymentTime},
+            payment_method = #{paymentMethod},
+            cancel_reason = #{cancelReason},
+            cancel_time = #{cancelTime},
+            remark = #{remark},
+            update_time = NOW()
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 更新预订状态 -->
+    <update id="updateStatus">
+        UPDATE t_venue_booking
+        SET
+            status = #{status},
+            update_time = NOW()
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 删除预订（逻辑删除） -->
+    <update id="delete">
+        UPDATE t_venue_booking
+        SET
+            is_deleted = 1,
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+</mapper>
+

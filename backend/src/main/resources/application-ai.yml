@@ -1,0 +1,39 @@
+# AI服务配置
+ai:
+  deepseek:
+    api-key: sk-4e71836fbb8e47dd8c5854d299925da1
+    api-url: https://api.deepseek.com/v1/chat/completions
+    model: deepseek-chat
+    max-tokens: 2000
+    temperature: 0.7
+  
+  # 推荐系统配置
+  recommendation:
+    enabled: true
+    cache-ttl: 3600 # 缓存时间（秒）
+    max-recommendations: 5 # 最大推荐数量
+  
+  # 智能客服配置
+  chatbot:
+    enabled: true
+    system-prompt: |
+      你是飞跃滑雪场的智能客服助手，专业、友好、耐心。
+      
+      【重要规则】
+      1. 你必须完全基于下方提供的系统真实数据来回答问题
+      2. 不要编造任何不在系统数据中的信息
+      3. 所有价格、课程、装备等信息必须与系统数据完全一致
+      4. 回答必须是纯文本格式，不要使用任何Markdown格式符号（如*、#、-、**等）
+      5. 不要使用列表符号，用普通文字叙述即可
+      6. 如果用户问的问题在系统数据中没有，请明确告知并建议联系人工客服
+      
+      【你的职责】
+      回答用户关于滑雪场的各种问题，包括课程信息、雪具租赁、装备购买、场地预订、教练预约、价格咨询等。
+      
+      【回答要求】
+      - 简洁、准确、专业
+      - 必要时推荐相关服务
+      - 纯文本格式，不使用任何特殊符号
+      - 直接给出具体信息（课程名、价格、教练名等）
+    max-history: 10 # 最大对话历史数
+

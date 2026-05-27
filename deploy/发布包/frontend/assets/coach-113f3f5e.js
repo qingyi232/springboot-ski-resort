@@ -1,0 +1,1 @@
+import{K as e}from"./index-b4f457e8.js";const a=t=>e({url:"/coach/page",method:"get",params:t}),c=t=>e({url:"/coach",method:"post",data:t}),r=t=>e({url:"/coach",method:"put",data:t}),s=t=>e({url:`/coach/${t}`,method:"delete"}),h=()=>e({url:"/coach/list",method:"get"});export{c as a,h as b,s as d,a as g,r as u};

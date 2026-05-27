@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>系统E-R图</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "SimSun", serif; background: #fff; padding: 30px; }
+        .container { width: 1100px; margin: 0 auto; }
+        svg { display: block; margin: 0 auto; background: #fff; }
+        .caption { text-align: center; margin-top: 20px; font-size: 14px; }
+        .entity { fill: #fff; stroke: #000; stroke-width: 1.5; }
+        .attr { fill: #fff; stroke: #000; stroke-width: 1; }
+        .relation { fill: #fff; stroke: #000; stroke-width: 1; }
+        .line { stroke: #000; stroke-width: 1; fill: none; }
+        text { font-family: SimSun; font-size: 12px; text-anchor: middle; dominant-baseline: middle; }
+        .card-num { font-size: 11px; }
+    </style>
+</head>
+<body>
+<div class="container">
+<svg width="1100" height="850" viewBox="0 0 1100 850">
+
+    <!-- ==================== 用户实体 (中心左侧) ==================== -->
+    <rect class="entity" x="80" y="380" width="70" height="35"/>
+    <text x="115" y="398">用户</text>
+    
+    <!-- 用户属性 -->
+    <ellipse class="attr" cx="40" cy="310" rx="30" ry="15"/>
+    <text x="40" y="310">用户名</text>
+    <line class="line" x1="60" y1="322" x2="95" y2="380"/>
+    
+    <ellipse class="attr" cx="115" cy="310" rx="25" ry="15"/>
+    <text x="115" y="310">密码</text>
+    <line class="line" x1="115" y1="325" x2="115" y2="380"/>
+    
+    <ellipse class="attr" cx="190" cy="310" rx="30" ry="15"/>
+    <text x="190" y="310">手机号</text>
+    <line class="line" x1="170" y1="322" x2="135" y2="380"/>
+    
+    <ellipse class="attr" cx="40" cy="470" rx="25" ry="15"/>
+    <text x="40" y="470">角色</text>
+    <line class="line" x1="60" y1="458" x2="95" y2="415"/>
+    
+    <ellipse class="attr" cx="190" cy="470" rx="25" ry="15"/>
+    <text x="190" y="470">状态</text>
+    <line class="line" x1="170" y1="458" x2="135" y2="415"/>
+
+    <!-- ==================== 第一行：雪具租赁 ==================== -->
+    <!-- 租赁关系 -->
+    <line class="line" x1="115" y1="380" x2="115" y2="120"/>
+    <line class="line" x1="115" y1="120" x2="240" y2="120"/>
+    <text class="card-num" x="180" y="108">1</text>
+    
+    <polygon class="relation" points="270,120 240,95 270,70 300,95"/>
+    <text x="270" y="95">租赁</text>
+    
+    <line class="line" x1="300" y1="95" x2="350" y2="95"/>
+    <text class="card-num" x="325" y="83">n</text>
+    
+    <!-- 雪具实体 -->
+    <rect class="entity" x="350" y="78" width="60" height="35"/>
+    <text x="380" y="96">雪具</text>
+    
+    <!-- 雪具属性 -->
+    <ellipse class="attr" cx="380" cy="35" rx="25" ry="15"/>
+    <text x="380" y="35">名称</text>
+    <line class="line" x1="380" y1="50" x2="380" y2="78"/>
+    
+    <ellipse class="attr" cx="450" cy="55" rx="25" ry="15"/>
+    <text x="450" y="55">类型</text>
+    <line class="line" x1="428" y1="62" x2="410" y2="78"/>
+    
+    <ellipse class="attr" cx="450" cy="95" rx="25" ry="15"/>
+    <text x="450" y="95">价格</text>
+    <line class="line" x1="425" y1="95" x2="410" y2="95"/>
+    
+    <ellipse class="attr" cx="450" cy="135" rx="25" ry="15"/>
+    <text x="450" y="135">库存</text>
+    <line class="line" x1="428" y1="128" x2="410" y2="113"/>
+
+    <!-- 雪具 -> 生成 -> 租赁订单 -->
+    <line class="line" x1="410" y1="95" x2="530" y2="95"/>
+    <text class="card-num" x="470" y="83">1</text>
+    
+    <polygon class="relation" points="560,95 530,70 560,45 590,70"/>
+    <text x="560" y="70">生成</text>
+    
+    <line class="line" x1="590" y1="70" x2="640" y2="70"/>
+    <text class="card-num" x="615" y="58">n</text>
+    
+    <!-- 租赁订单实体 -->
+    <rect class="entity" x="640" y="53" width="75" height="35"/>
+    <text x="677" y="71">租赁订单</text>
+    
+    <!-- 租赁订单属性 -->
+    <ellipse class="attr" cx="760" cy="35" rx="30" ry="15"/>
+    <text x="760" y="35">订单号</text>
+    <line class="line" x1="733" y1="43" x2="715" y2="53"/>
+    
+    <ellipse class="attr" cx="760" cy="75" rx="25" ry="15"/>
+    <text x="760" y="75">金额</text>
+    <line class="line" x1="735" y1="75" x2="715" y2="70"/>
+    
+    <ellipse class="attr" cx="760" cy="115" rx="25" ry="15"/>
+    <text x="760" y="115">状态</text>
+    <line class="line" x1="738" y1="105" x2="715" y2="88"/>
+
+    <!-- ==================== 第二行：教练预约 ==================== -->
+    <!-- 预约关系 -->
+    <line class="line" x1="150" y1="398" x2="240" y2="220"/>
+    <text class="card-num" x="180" y="295">1</text>
+    
+    <polygon class="relation" points="270,220 240,195 270,170 300,195"/>
+    <text x="270" y="195">预约</text>
+    
+    <line class="line" x1="300" y1="195" x2="350" y2="195"/>
+    <text class="card-num" x="325" y="183">n</text>
+    
+    <!-- 教练实体 -->
+    <rect class="entity" x="350" y="178" width="60" height="35"/>
+    <text x="380" y="196">教练</text>
+    
+    <!-- 教练属性 -->
+    <ellipse class="attr" cx="450" cy="155" rx="25" ry="15"/>
+    <text x="450" y="155">姓名</text>
+    <line class="line" x1="428" y1="162" x2="410" y2="178"/>
+    
+    <ellipse class="attr" cx="450" cy="195" rx="25" ry="15"/>
+    <text x="450" y="195">专长</text>
+    <line class="line" x1="425" y1="195" x2="410" y2="195"/>
+    
+    <ellipse class="attr" cx="450" cy="235" rx="25" ry="15"/>
+    <text x="450" y="235">时薪</text>
+    <line class="line" x1="428" y1="228" x2="410" y2="213"/>
+
+    <!-- 教练 -> 生成 -> 预约订单 -->
+    <line class="line" x1="410" y1="195" x2="530" y2="195"/>
+    <text class="card-num" x="470" y="183">1</text>
+    
+    <polygon class="relation" points="560,195 530,170 560,145 590,170"/>
+    <text x="560" y="170">生成</text>
+    
+    <line class="line" x1="590" y1="170" x2="640" y2="170"/>
+    <text class="card-num" x="615" y="158">n</text>
+    
+    <!-- 预约订单实体 -->
+    <rect class="entity" x="640" y="153" width="75" height="35"/>
+    <text x="677" y="171">预约订单</text>
+    
+    <!-- 预约订单属性 -->
+    <ellipse class="attr" cx="760" cy="135" rx="30" ry="15"/>
+    <text x="760" y="135">预约号</text>
+    <line class="line" x1="733" y1="143" x2="715" y2="153"/>
+    
+    <ellipse class="attr" cx="760" cy="175" rx="25" ry="15"/>
+    <text x="760" y="175">金额</text>
+    <line class="line" x1="735" y1="175" x2="715" y2="170"/>
+    
+    <ellipse class="attr" cx="760" cy="215" rx="25" ry="15"/>
+    <text x="760" y="215">状态</text>
+    <line class="line" x1="738" y1="205" x2="715" y2="188"/>
+
+    <!-- ==================== 第三行：商品购买 ==================== -->
+    <!-- 购买关系 -->
+    <line class="line" x1="150" y1="398" x2="240" y2="320"/>
+    <text class="card-num" x="180" y="345">1</text>
+    
+    <polygon class="relation" points="270,320 240,295 270,270 300,295"/>
+    <text x="270" y="295">购买</text>
+    
+    <line class="line" x1="300" y1="295" x2="350" y2="295"/>
+    <text class="card-num" x="325" y="283">n</text>
+    
+    <!-- 商品实体 -->
+    <rect class="entity" x="350" y="278" width="60" height="35"/>
+    <text x="380" y="296">商品</text>
+    
+    <!-- 商品属性 -->
+    <ellipse class="attr" cx="450" cy="255" rx="25" ry="15"/>
+    <text x="450" y="255">名称</text>
+    <line class="line" x1="428" y1="262" x2="410" y2="278"/>
+    
+    <ellipse class="attr" cx="450" cy="295" rx="25" ry="15"/>
+    <text x="450" y="295">分类</text>
+    <line class="line" x1="425" y1="295" x2="410" y2="295"/>
+    
+    <ellipse class="attr" cx="450" cy="335" rx="25" ry="15"/>
+    <text x="450" y="335">价格</text>
+    <line class="line" x1="428" y1="328" x2="410" y2="313"/>
+
+    <!-- 商品 -> 生成 -> 销售订单 -->
+    <line class="line" x1="410" y1="295" x2="530" y2="295"/>
+    <text class="card-num" x="470" y="283">1</text>
+    
+    <polygon class="relation" points="560,295 530,270 560,245 590,270"/>
+    <text x="560" y="270">生成</text>
+    
+    <line class="line" x1="590" y1="270" x2="640" y2="270"/>
+    <text class="card-num" x="615" y="258">n</text>
+    
+    <!-- 销售订单实体 -->
+    <rect class="entity" x="640" y="253" width="75" height="35"/>
+    <text x="677" y="271">销售订单</text>
+    
+    <!-- 销售订单属性 -->
+    <ellipse class="attr" cx="760" cy="235" rx="30" ry="15"/>
+    <text x="760" y="235">订单号</text>
+    <line class="line" x1="733" y1="243" x2="715" y2="253"/>
+    
+    <ellipse class="attr" cx="760" cy="275" rx="25" ry="15"/>
+    <text x="760" y="275">金额</text>
+    <line class="line" x1="735" y1="275" x2="715" y2="270"/>
+    
+    <ellipse class="attr" cx="760" cy="315" rx="25" ry="15"/>
+    <text x="760" y="315">状态</text>
+    <line class="line" x1="738" y1="305" x2="715" y2="288"/>
+
+    <!-- ==================== 第四行：会员卡办理 ==================== -->
+    <!-- 办理关系 -->
+    <line class="line" x1="150" y1="398" x2="240" y2="420"/>
+    <text class="card-num" x="180" y="395">1</text>
+    
+    <polygon class="relation" points="270,420 240,395 270,370 300,395"/>
+    <text x="270" y="395">办理</text>
+    
+    <line class="line" x1="300" y1="395" x2="350" y2="395"/>
+    <text class="card-num" x="325" y="383">n</text>
+    
+    <!-- 会员卡实体 -->
+    <rect class="entity" x="350" y="378" width="70" height="35"/>
+    <text x="385" y="396">会员卡</text>
+    
+    <!-- 会员卡属性 -->
+    <ellipse class="attr" cx="460" cy="355" rx="25" ry="15"/>
+    <text x="460" y="355">卡号</text>
+    <line class="line" x1="438" y1="362" x2="420" y2="378"/>
+    
+    <ellipse class="attr" cx="460" cy="395" rx="25" ry="15"/>
+    <text x="460" y="395">类型</text>
+    <line class="line" x1="435" y1="395" x2="420" y2="395"/>
+    
+    <ellipse class="attr" cx="460" cy="435" rx="25" ry="15"/>
+    <text x="460" y="435">折扣</text>
+    <line class="line" x1="438" y1="428" x2="420" y2="413"/>
+
+    <!-- ==================== 第五行：课程报名 ==================== -->
+    <!-- 报名关系 -->
+    <line class="line" x1="150" y1="398" x2="240" y2="520"/>
+    <text class="card-num" x="180" y="445">1</text>
+    
+    <polygon class="relation" points="270,520 240,495 270,470 300,495"/>
+    <text x="270" y="495">报名</text>
+    
+    <line class="line" x1="300" y1="495" x2="350" y2="495"/>
+    <text class="card-num" x="325" y="483">n</text>
+    
+    <!-- 课程实体 -->
+    <rect class="entity" x="350" y="478" width="60" height="35"/>
+    <text x="380" y="496">课程</text>
+    
+    <!-- 课程属性 -->
+    <ellipse class="attr" cx="450" cy="455" rx="25" ry="15"/>
+    <text x="450" y="455">名称</text>
+    <line class="line" x1="428" y1="462" x2="410" y2="478"/>
+    
+    <ellipse class="attr" cx="450" cy="495" rx="25" ry="15"/>
+    <text x="450" y="495">类型</text>
+    <line class="line" x1="425" y1="495" x2="410" y2="495"/>
+    
+    <ellipse class="attr" cx="450" cy="535" rx="25" ry="15"/>
+    <text x="450" y="535">价格</text>
+    <line class="line" x1="428" y1="528" x2="410" y2="513"/>
+
+    <!-- 课程 -> 生成 -> 课程报名 -->
+    <line class="line" x1="410" y1="495" x2="530" y2="495"/>
+    <text class="card-num" x="470" y="483">1</text>
+    
+    <polygon class="relation" points="560,495 530,470 560,445 590,470"/>
+    <text x="560" y="470">生成</text>
+    
+    <line class="line" x1="590" y1="470" x2="640" y2="470"/>
+    <text class="card-num" x="615" y="458">n</text>
+    
+    <!-- 课程报名实体 -->
+    <rect class="entity" x="640" y="453" width="75" height="35"/>
+    <text x="677" y="471">课程报名</text>
+    
+    <!-- 课程报名属性 -->
+    <ellipse class="attr" cx="760" cy="435" rx="30" ry="15"/>
+    <text x="760" y="435">报名号</text>
+    <line class="line" x1="733" y1="443" x2="715" y2="453"/>
+    
+    <ellipse class="attr" cx="760" cy="475" rx="25" ry="15"/>
+    <text x="760" y="475">金额</text>
+    <line class="line" x1="735" y1="475" x2="715" y2="470"/>
+    
+    <ellipse class="attr" cx="760" cy="515" rx="25" ry="15"/>
+    <text x="760" y="515">状态</text>
+    <line class="line" x1="738" y1="505" x2="715" y2="488"/>
+
+    <!-- ==================== 第六行：场地预约 ==================== -->
+    <!-- 预约关系 -->
+    <line class="line" x1="150" y1="398" x2="240" y2="620"/>
+    <text class="card-num" x="180" y="495">1</text>
+    
+    <polygon class="relation" points="270,620 240,595 270,570 300,595"/>
+    <text x="270" y="595">预约</text>
+    
+    <line class="line" x1="300" y1="595" x2="350" y2="595"/>
+    <text class="card-num" x="325" y="583">n</text>
+    
+    <!-- 场地实体 -->
+    <rect class="entity" x="350" y="578" width="60" height="35"/>
+    <text x="380" y="596">场地</text>
+    
+    <!-- 场地属性 -->
+    <ellipse class="attr" cx="450" cy="555" rx="25" ry="15"/>
+    <text x="450" y="555">名称</text>
+    <line class="line" x1="428" y1="562" x2="410" y2="578"/>
+    
+    <ellipse class="attr" cx="450" cy="595" rx="25" ry="15"/>
+    <text x="450" y="595">类型</text>
+    <line class="line" x1="425" y1="595" x2="410" y2="595"/>
+    
+    <ellipse class="attr" cx="450" cy="635" rx="25" ry="15"/>
+    <text x="450" y="635">容量</text>
+    <line class="line" x1="428" y1="628" x2="410" y2="613"/>
+
+    <!-- 场地 -> 生成 -> 场地预订 -->
+    <line class="line" x1="410" y1="595" x2="530" y2="595"/>
+    <text class="card-num" x="470" y="583">1</text>
+    
+    <polygon class="relation" points="560,595 530,570 560,545 590,570"/>
+    <text x="560" y="570">生成</text>
+    
+    <line class="line" x1="590" y1="570" x2="640" y2="570"/>
+    <text class="card-num" x="615" y="558">n</text>
+    
+    <!-- 场地预订实体 -->
+    <rect class="entity" x="640" y="553" width="75" height="35"/>
+    <text x="677" y="571">场地预订</text>
+    
+    <!-- 场地预订属性 -->
+    <ellipse class="attr" cx="760" cy="535" rx="30" ry="15"/>
+    <text x="760" y="535">预订号</text>
+    <line class="line" x1="733" y1="543" x2="715" y2="553"/>
+    
+    <ellipse class="attr" cx="760" cy="575" rx="25" ry="15"/>
+    <text x="760" y="575">金额</text>
+    <line class="line" x1="735" y1="575" x2="715" y2="570"/>
+    
+    <ellipse class="attr" cx="760" cy="615" rx="25" ry="15"/>
+    <text x="760" y="615">状态</text>
+    <line class="line" x1="738" y1="605" x2="715" y2="588"/>
+
+    <!-- ==================== 第七行：评价 ==================== -->
+    <!-- 评价关系 -->
+    <line class="line" x1="150" y1="398" x2="240" y2="720"/>
+    <text class="card-num" x="180" y="545">1</text>
+    
+    <polygon class="relation" points="270,720 240,695 270,670 300,695"/>
+    <text x="270" y="695">发表</text>
+    
+    <line class="line" x1="300" y1="695" x2="350" y2="695"/>
+    <text class="card-num" x="325" y="683">n</text>
+    
+    <!-- 评价实体 -->
+    <rect class="entity" x="350" y="678" width="60" height="35"/>
+    <text x="380" y="696">评价</text>
+    
+    <!-- 评价属性 -->
+    <ellipse class="attr" cx="450" cy="655" rx="25" ry="15"/>
+    <text x="450" y="655">评分</text>
+    <line class="line" x1="428" y1="662" x2="410" y2="678"/>
+    
+    <ellipse class="attr" cx="450" cy="695" rx="25" ry="15"/>
+    <text x="450" y="695">内容</text>
+    <line class="line" x1="425" y1="695" x2="410" y2="695"/>
+    
+    <ellipse class="attr" cx="450" cy="735" rx="25" ry="15"/>
+    <text x="450" y="735">对象</text>
+    <line class="line" x1="428" y1="728" x2="410" y2="713"/>
+
+    <!-- ==================== FAQ独立实体 ==================== -->
+    <rect class="entity" x="640" y="678" width="55" height="35"/>
+    <text x="667" y="696">FAQ</text>
+    
+    <!-- FAQ属性 -->
+    <ellipse class="attr" cx="740" cy="655" rx="25" ry="15"/>
+    <text x="740" y="655">问题</text>
+    <line class="line" x1="718" y1="662" x2="695" y2="678"/>
+    
+    <ellipse class="attr" cx="740" cy="695" rx="25" ry="15"/>
+    <text x="740" y="695">答案</text>
+    <line class="line" x1="715" y1="695" x2="695" y2="695"/>
+    
+    <ellipse class="attr" cx="740" cy="735" rx="25" ry="15"/>
+    <text x="740" y="735">分类</text>
+    <line class="line" x1="718" y1="728" x2="695" y2="713"/>
+
+    <!-- ==================== 图例 ==================== -->
+    <rect x="880" y="680" width="180" height="130" fill="none" stroke="#999" stroke-dasharray="3"/>
+    <text x="970" y="700" style="font-weight:bold;">图例</text>
+    
+    <rect x="895" y="715" width="40" height="20" class="entity"/>
+    <text x="975" y="725">实体</text>
+    
+    <ellipse cx="915" cy="755" rx="20" ry="12" class="attr"/>
+    <text x="975" y="755">属性</text>
+    
+    <polygon points="915,795 895,780 915,765 935,780" class="relation"/>
+    <text x="975" y="780">联系</text>
+
+</svg>
+</div>
+<div class="caption">图 1.2 飞跃滑雪场管理系统E-R图</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+=== [57] ===
+不过从实际情况来看，很多中小型滑雪场在管理上还比较传统。有的雪场租赁雪具还在用纸质登记本，有的教练预约靠电话或微信沟通，收入数据统计也不方便。随着客流量增大，这些做法已难以满足实际需求[3]。
+
+=== [58] ===
+开发一套针对滑雪场业务的管理系统，能够将各项业务流程规范化，使管理者实时掌握运营状况，同时为顾客提供更加便捷的服务体验。这是本文选择开发滑雪场管理系统的出发点。
+
+=== [59] ===
+本文设计的飞跃滑雪场管理系统，主要面向中小型雪场的日常运营管理。系统里涵盖了雪具租赁、教练预约、课程报名、场地预约等滑雪场最常见的业务场景，管理员、教练、工作人员和普通用户分别拥有各自的操作界面和功能权限。开发本系统也是对大学期间所学Java和前端知识的综合应用，以期为雪场的信息化建设提供参考。
+
+=== [74] ===
+本系统使用的是Spring Boot 2.7版本。选择该版本的原因是其较为成熟稳定，且相关教程和文档较为丰富，便于解决开发中遇到的问题。在本项目中，Spring Boot主要承担三方面职责：一是作为Web服务器，内嵌Tomcat无需额外部署；二是管理各个组件之间的依赖关系；三是通过application.yml文件集中管理各种配置参数。
+
+=== [171] ===
+商品租赁的整体业务流程如下：用户首先在商品列表页面浏览可租赁的雪具和装备，选择目标商品后填写租赁时长及数量，随后提交生成订单。在此过程中，系统会自动校验该商品的当前库存是否充足，若库存满足需求则正常生成订单并同步扣减相应库存数量；若库存不足，则提示用户无法完成租赁。当用户使用完毕或到达约定归还时间后，工作人员在后台执行归还确认操作，系统随即将订单状态更新为“已归还”，并自动恢复对应商品的可用库存数量。
+
+=== [172] ===
+用户登录的处理流程如下：用户在系统登录界面输入账号和密码后，前端首先进行表单校验，验证各输入项是否为空。校验通过后，前端通过HTTP请求将登录信息发送至后端进行身份验证。后端接收到请求后，查询数据库核实用户名和密码是否匹配，验证通过后生成JWT Token并返回给前端。前端收到Token后将其存储至浏览器本地存储，随后根据用户角色跳转至相应的首页。若后端验证失败（密码错误或用户名不存在），则返回相应错误信息，前端在页面上弹出提示告知用户。
+
+=== [173] ===
+在完成功能模块划分和数据库表结构设计之后，下一步工作是梳理系统中核心业务操作的执行流程，以便在编码阶段具有清晰的开发思路。本节主要针对用户登录和商品租赁两个核心业务流程进行了详细的分析与设计。
+
+=== [244] ===
+在工作人员的日常操作中，归还处理是最为频繁的业务操作之一。当顾客归还租赁的雪具时，工作人员需在系统的订单列表页面中查找对应的租赁订单，点击“确认归还”按钮。系统接收到归还确认操作后，将该订单状态由“使用中”更新为“已归还”，同时自动恢复对应商品的可用库存数量。以下为后端处理归还操作的核心代码：
+
+=== [296] ===
+经过以上测试验证，系统的主要功能均已正常运行，包括用户登录、商品租赁、教练预约、课程报名、场地预约、数据统计等核心业务流程均通过测试。接口响应时间均在200ms以内，满足性能要求。
+
+=== [302] ===
+本文设计并实现了一个基于Spring Boot的飞跃滑雪场管理系统。后端采用Spring Boot 2.7结合MyBatis操作MySQL数据库，引入Redis进行数据缓存，JWT实现身份认证；前端采用Vue 3和Element Plus构建页面，ECharts绑制数据图表。整个项目采用前后端分离的架构进行开发。
+
+=== [304] ===
+在本项目的开发过程中，笔者收获颇多。此前学习Spring Boot和Vue时多为独立的小型练习，本次将其整合于完整项目中，才深刻体会到前后端联调、接口对接等环节的复杂性。例如前端页面逻辑与后端数据格式不一致时的处理方式、分页查询参数的传递方式、跨域问题的解决方案等，这些在小型练习中难以遇到。当然，系统仍有诸多可改进之处。
+
+=== REFERENCES ===
+[1]国务院办公厅.关于以冰雪运动高质量发展激发冰雪经济活力的若干意见[Z].国办发〔2024〕49号, 2024.
+[2]中共中央办公厅,国务院办公厅.关于构建更高水平的全民健身公共服务体系的意见[Z]. 2022.
+[3] Craig Walls. Spring实战(第6版)[M].张卫滨,吴国浩,译.北京:人民邮电出版社, 2022.
+[4]杨开振.深入浅出Spring Boot 3.x[M].北京:人民邮电出版社, 2024.
+[5]霍春阳. Vue.js设计与实现[M].北京:人民邮电出版社, 2022.
+[6] R. Shah. Microservices with Spring Boot: Simplifying Distributed Systems[J]. International Journal For Multidiscipli
+[7] J. Troya, D. Bravo. Comparative Analysis of the Efficiency of Data Persistence Frameworks: Hibernate and MyBatis[J].
+[8] Z. Wang, H. Liu. Research on Performance Optimization of MySQL Database[C]. IEEE International Conference on Softwar
+[9]王珊,杜小勇,陈红.数据库系统概论(第6版)[M].北京:高等教育出版社, 2023.
+[10]李子骅. Redis入门指南(第3版)[M].北京:人民邮电出版社, 2021.
+[11] M. Suhartanto, A. Amalia. Performance and Security Comparison of JSON Web Tokens and Platform Agnostic Security Tok
+[12] L. Li, Y. Zhang. Design and Implementation of Epidemic Big Data Visualization Platform Based on Vue and ECharts[C].
+[13] A. Nurhakim, M. Ahsan. Quantitative Study on Virtual DOM Diff Performance with Different Key Attribute Usage: A Cas
+[14] D. Li, H. Mei, Y. Shen, et al. ECharts: A Declarative Framework for Rapid Construction of Web-based Visualization[J
+[15]谢希仁.计算机网络(第8版)[M].北京:电子工业出版社, 2021.
+
+=== SUPERSCRIPT CHECK ===
+Para [56]: superscript = "[1]"
+Para [56]: superscript = "[2]"
+Para [57]: superscript = "[3]"
+Para [73]: superscript = "[6]"
+Para [73]: superscript = "[4]"
+Para [79]: superscript = "[8]"
+Para [79]: superscript = "[9]"
+Para [82]: superscript = "[10]"

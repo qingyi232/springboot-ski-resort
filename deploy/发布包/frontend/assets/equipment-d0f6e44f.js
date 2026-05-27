@@ -1,0 +1,1 @@
+import{K as t}from"./index-2300af74.js";const n=e=>t({url:"/equipment/page",method:"get",params:e}),r=e=>t({url:"/equipment",method:"post",data:e}),m=e=>t({url:"/equipment",method:"put",data:e}),p=e=>t({url:`/equipment/${e}`,method:"delete"}),a=()=>t({url:"/equipment/list/available",method:"get"});export{a,r as b,p as d,n as g,m as u};

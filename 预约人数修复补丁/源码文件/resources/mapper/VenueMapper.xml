@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ski.resort.mapper.VenueMapper">
+
+    <resultMap id="VenueResultMap" type="com.ski.resort.entity.Venue">
+        <id column="id" property="id"/>
+        <result column="venue_code" property="venueCode"/>
+        <result column="venue_name" property="venueName"/>
+        <result column="venue_type" property="venueType"/>
+        <result column="difficulty_level" property="difficultyLevel"/>
+        <result column="length" property="length"/>
+        <result column="width" property="width"/>
+        <result column="max_capacity" property="maxCapacity"/>
+        <result column="current_capacity" property="currentCapacity"/>
+        <result column="rental_price" property="rentalPrice"/>
+        <result column="status" property="status"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, venue_code, venue_name, venue_type, difficulty_level, length, width,
+        max_capacity, current_capacity, rental_price, status, image_url,
+        description, create_time, update_time, is_deleted
+    </sql>
+
+    <select id="selectById" resultMap="VenueResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_venue WHERE id = #{id} AND is_deleted = 0
+    </select>
+
+    <select id="selectByCode" resultMap="VenueResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_venue WHERE venue_code = #{venueCode} AND is_deleted = 0
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_venue (venue_code, venue_name, venue_type, difficulty_level, length, width,
+            max_capacity, current_capacity, rental_price, status, image_url, description)
+        VALUES (#{venueCode}, #{venueName}, #{venueType}, #{difficultyLevel}, #{length}, #{width},
+            #{maxCapacity}, #{currentCapacity}, #{rentalPrice}, #{status}, #{imageUrl}, #{description})
+    </insert>
+
+    <update id="update">
+        UPDATE t_venue
+        <set>
+            <if test="venueCode != null">venue_code = #{venueCode},</if>
+            <if test="venueName != null">venue_name = #{venueName},</if>
+            <if test="venueType != null">venue_type = #{venueType},</if>
+            <if test="difficultyLevel != null">difficulty_level = #{difficultyLevel},</if>
+            <if test="length != null">length = #{length},</if>
+            <if test="width != null">width = #{width},</if>
+            <if test="maxCapacity != null">max_capacity = #{maxCapacity},</if>
+            <if test="currentCapacity != null">current_capacity = #{currentCapacity},</if>
+            <if test="rentalPrice != null">rental_price = #{rentalPrice},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="imageUrl != null">image_url = #{imageUrl},</if>
+            <if test="description != null">description = #{description},</if>
+        </set>
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE t_venue SET is_deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectAll" resultMap="VenueResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_venue WHERE is_deleted = 0 ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByType" resultMap="VenueResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_venue WHERE venue_type = #{venueType} AND is_deleted = 0 ORDER BY create_time DESC
+    </select>
+
+    <select id="selectAvailable" resultMap="VenueResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_venue WHERE status = 1 AND current_capacity &lt; max_capacity AND is_deleted = 0 ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByDifficulty" resultMap="VenueResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_venue WHERE difficulty_level = #{difficultyLevel} AND is_deleted = 0 ORDER BY create_time DESC
+    </select>
+
+    <select id="selectPage" resultMap="VenueResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_venue WHERE is_deleted = 0 ORDER BY create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_venue WHERE is_deleted = 0
+    </select>
+
+    <select id="countByCondition" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_venue WHERE is_deleted = 0
+        <if test="venueCode != null and venueCode != ''">AND venue_code LIKE CONCAT('%', #{venueCode}, '%')</if>
+        <if test="venueName != null and venueName != ''">AND venue_name LIKE CONCAT('%', #{venueName}, '%')</if>
+        <if test="venueType != null and venueType != ''">AND venue_type = #{venueType}</if>
+        <if test="status != null">AND status = #{status}</if>
+    </select>
+
+    <select id="selectByCondition" resultMap="VenueResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_venue WHERE is_deleted = 0
+        <if test="venueCode != null and venueCode != ''">AND venue_code LIKE CONCAT('%', #{venueCode}, '%')</if>
+        <if test="venueName != null and venueName != ''">AND venue_name LIKE CONCAT('%', #{venueName}, '%')</if>
+        <if test="venueType != null and venueType != ''">AND venue_type = #{venueType}</if>
+        <if test="status != null">AND status = #{status}</if>
+        ORDER BY create_time DESC
+        <if test="offset != null and limit != null">LIMIT #{offset}, #{limit}</if>
+    </select>
+
+    <update id="updateStatus">
+        UPDATE t_venue SET status = #{status} WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="updateCurrentCapacity">
+        UPDATE t_venue SET current_capacity = #{count} WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="incrementCurrentCapacity">
+        UPDATE t_venue SET current_capacity = current_capacity + 1 WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="decrementCurrentCapacity">
+        UPDATE t_venue SET current_capacity = current_capacity - 1 WHERE id = #{id} AND is_deleted = 0 AND current_capacity > 0
+    </update>
+
+    <update id="incrementCurrentCapacityBy">
+        UPDATE t_venue SET current_capacity = current_capacity + #{count} WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="decrementCurrentCapacityBy">
+        UPDATE t_venue SET current_capacity = GREATEST(current_capacity - #{count}, 0) WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+</mapper>
+
+
+

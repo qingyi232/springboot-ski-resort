@@ -1,0 +1,1 @@
+import{K as t}from"./index-2300af74.js";function a(){return t({url:"/api/v1/statistics/admin",method:"get"})}function e(i){return t({url:`/api/v1/statistics/coach/${i}`,method:"get"})}export{a,e as g};

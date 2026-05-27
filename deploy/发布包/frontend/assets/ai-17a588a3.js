@@ -1,0 +1,1 @@
+import{K as t}from"./index-b4f457e8.js";function o(e){return t({url:"/api/v1/ai/recommend/courses",method:"post",data:e})}function m(e){return t({url:"/api/v1/ai/recommend/equipment",method:"post",data:e})}function n(e){return t({url:"/api/v1/ai/chatbot",method:"post",data:e})}export{m as a,n as c,o as r};

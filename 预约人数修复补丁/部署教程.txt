@@ -1,0 +1,100 @@
+========================================
+  飞跃滑雪场管理系统 - 预约人数修复补丁
+  修复问题：预约多人时，场地当前人数只+1
+========================================
+
+【修复说明】
+原来系统中，不管预约多少人，场地的"当前人数"都只会+1。
+修复后，会按照实际预约人数来增减场地的当前人数。
+
+========================================
+  方式一：替换JAR包内文件（推荐）
+========================================
+
+需要替换的文件共3个，都在 "编译文件" 文件夹中。
+
+步骤：
+1. 先停止后端服务（关闭Java进程）
+
+2. 找到部署的JAR包（例如：ski-resort-backend-1.0.0.jar）
+
+3. 用压缩软件（如7-Zip、WinRAR）打开JAR包
+   （JAR包本质就是zip压缩包，右键 -> 用7-Zip打开）
+
+4. 替换以下3个文件：
+
+   文件1：VenueMapper.class
+   补丁位置：编译文件\classes\com\ski\resort\mapper\VenueMapper.class
+   JAR内路径：BOOT-INF\classes\com\ski\resort\mapper\VenueMapper.class
+
+   文件2：VenueBookingServiceImpl.class
+   补丁位置：编译文件\classes\com\ski\resort\service\impl\VenueBookingServiceImpl.class
+   JAR内路径：BOOT-INF\classes\com\ski\resort\service\impl\VenueBookingServiceImpl.class
+
+   文件3：VenueMapper.xml
+   补丁位置：编译文件\classes\mapper\VenueMapper.xml
+   JAR内路径：BOOT-INF\classes\mapper\VenueMapper.xml
+
+5. 替换完成后保存JAR包，重新启动后端服务
+
+========================================
+  方式二：替换源码后重新编译（如果有开发环境）
+========================================
+
+需要替换的源码文件共3个，都在 "源码文件" 文件夹中。
+
+   文件1：VenueMapper.java
+   补丁位置：源码文件\mapper\VenueMapper.java
+   项目路径：backend\src\main\java\com\ski\resort\mapper\VenueMapper.java
+
+   文件2：VenueBookingServiceImpl.java
+   补丁位置：源码文件\service\impl\VenueBookingServiceImpl.java
+   项目路径：backend\src\main\java\com\ski\resort\service\impl\VenueBookingServiceImpl.java
+
+   文件3：VenueMapper.xml
+   补丁位置：源码文件\resources\mapper\VenueMapper.xml
+   项目路径：backend\src\main\resources\mapper\VenueMapper.xml
+
+替换后执行：mvn clean package -DskipTests
+然后用新生成的JAR包替换部署的JAR包并重启服务。
+
+========================================
+  重要：修正数据库中的现有数据
+========================================
+
+替换文件并重启服务后，还需要在数据库中执行以下SQL，
+重新计算每个场地的当前人数（因为之前的数据是错误的）：
+
+-- 在MySQL中执行以下SQL：
+UPDATE t_venue v
+INNER JOIN (
+  SELECT venue_id, COALESCE(SUM(people_count), 0) AS total_people
+  FROM t_venue_booking
+  WHERE status IN (0, 1, 2)
+    AND is_deleted = 0
+  GROUP BY venue_id
+) vb ON v.id = vb.venue_id
+SET v.current_capacity = vb.total_people
+WHERE v.is_deleted = 0;
+
+-- 同时将没有活跃预约的场地人数归零：
+UPDATE t_venue
+SET current_capacity = 0
+WHERE is_deleted = 0
+  AND id NOT IN (
+    SELECT DISTINCT venue_id
+    FROM t_venue_booking
+    WHERE status IN (0, 1, 2)
+      AND is_deleted = 0
+  );
+
+========================================
+  验证修复是否成功
+========================================
+
+1. 重启服务后，用普通用户登录，预约一个场地，人数选3人
+2. 用工作人员账号登录，查看"场地查看"页面
+3. 确认该场地的"当前人数"增加了3（而不是1）
+4. 取消该预约后，确认人数减少了3
+
+如有问题请联系技术支持。

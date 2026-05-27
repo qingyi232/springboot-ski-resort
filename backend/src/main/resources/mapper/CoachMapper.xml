@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ski.resort.mapper.CoachMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="CoachResultMap" type="com.ski.resort.entity.Coach">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coach_name" property="coachName"/>
+        <result column="coach_code" property="coachCode"/>
+        <result column="coach_level" property="coachLevel"/>
+        <result column="specialty" property="specialty"/>
+        <result column="experience_years" property="experienceYears"/>
+        <result column="certification" property="certification"/>
+        <result column="hourly_rate" property="hourlyRate"/>
+        <result column="rating" property="rating"/>
+        <result column="total_reviews" property="totalReviews"/>
+        <result column="total_students" property="totalStudents"/>
+        <result column="avatar" property="avatar"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="introduction" property="introduction"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <!-- 基础查询字段 -->
+    <sql id="BaseColumns">
+        id, user_id, coach_name, coach_code, coach_level, specialty, experience_years,
+        certification, hourly_rate, rating, total_reviews, total_students, avatar,
+        phone, email, introduction, status, create_time, update_time, is_deleted
+    </sql>
+
+    <!-- 根据ID查询教练 -->
+    <select id="selectById" resultMap="CoachResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_coach
+        WHERE id = #{id} AND is_deleted = 0
+    </select>
+
+    <!-- 根据教练编号查询 -->
+    <select id="selectByCode" resultMap="CoachResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_coach
+        WHERE coach_code = #{coachCode} AND is_deleted = 0
+    </select>
+
+    <!-- 根据用户ID查询教练 -->
+    <select id="selectByUserId" resultMap="CoachResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_coach
+        WHERE user_id = #{userId} AND is_deleted = 0
+    </select>
+
+    <!-- 插入教练 -->
+    <insert id="insert" parameterType="com.ski.resort.entity.Coach" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_coach (
+            user_id, coach_name, coach_code, coach_level, specialty, experience_years,
+            certification, hourly_rate, rating, total_reviews, total_students, avatar,
+            phone, email, introduction, status
+        ) VALUES (
+            #{userId}, #{coachName}, #{coachCode}, #{coachLevel}, #{specialty}, #{experienceYears},
+            #{certification}, #{hourlyRate}, #{rating}, #{totalReviews}, #{totalStudents}, #{avatar},
+            #{phone}, #{email}, #{introduction}, #{status}
+        )
+    </insert>
+
+    <!-- 更新教练 -->
+    <update id="update" parameterType="com.ski.resort.entity.Coach">
+        UPDATE t_coach
+        <set>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="coachName != null and coachName != ''">coach_name = #{coachName},</if>
+            <if test="coachCode != null and coachCode != ''">coach_code = #{coachCode},</if>
+            <if test="coachLevel != null and coachLevel != ''">coach_level = #{coachLevel},</if>
+            <if test="specialty != null and specialty != ''">specialty = #{specialty},</if>
+            <if test="experienceYears != null">experience_years = #{experienceYears},</if>
+            <if test="certification != null and certification != ''">certification = #{certification},</if>
+            <if test="hourlyRate != null">hourly_rate = #{hourlyRate},</if>
+            <if test="rating != null">rating = #{rating},</if>
+            <if test="totalReviews != null">total_reviews = #{totalReviews},</if>
+            <if test="totalStudents != null">total_students = #{totalStudents},</if>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="introduction != null and introduction != ''">introduction = #{introduction},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = CURRENT_TIMESTAMP
+        </set>
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 逻辑删除教练 -->
+    <update id="deleteById">
+        UPDATE t_coach
+        SET is_deleted = 1
+        WHERE id = #{id}
+    </update>
+
+    <!-- 查询所有教练 -->
+    <select id="selectAll" resultMap="CoachResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_coach
+        WHERE is_deleted = 0
+        ORDER BY rating DESC, create_time DESC
+    </select>
+
+    <!-- 根据等级查询教练列表 -->
+    <select id="selectByLevel" resultMap="CoachResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_coach
+        WHERE coach_level = #{coachLevel} AND is_deleted = 0
+        ORDER BY rating DESC
+    </select>
+
+    <!-- 查询在职教练列表 -->
+    <select id="selectActive" resultMap="CoachResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_coach
+        WHERE status = 1 AND is_deleted = 0
+        ORDER BY rating DESC
+    </select>
+
+    <!-- 分页查询教练列表 -->
+    <select id="selectPage" resultMap="CoachResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_coach
+        WHERE is_deleted = 0
+        ORDER BY rating DESC, create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 统计教练总数 -->
+    <select id="countAll" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_coach WHERE is_deleted = 0
+    </select>
+
+    <!-- 根据条件统计教练数 -->
+    <select id="countByCondition" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_coach
+        WHERE is_deleted = 0
+        <if test="coachCode != null and coachCode != ''">
+            AND coach_code LIKE CONCAT('%', #{coachCode}, '%')
+        </if>
+        <if test="coachName != null and coachName != ''">
+            AND coach_name LIKE CONCAT('%', #{coachName}, '%')
+        </if>
+        <if test="coachLevel != null and coachLevel != ''">
+            AND coach_level = #{coachLevel}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <!-- 根据条件查询教练列表 -->
+    <select id="selectByCondition" resultMap="CoachResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_coach
+        WHERE is_deleted = 0
+        <if test="coachCode != null and coachCode != ''">
+            AND coach_code LIKE CONCAT('%', #{coachCode}, '%')
+        </if>
+        <if test="coachName != null and coachName != ''">
+            AND coach_name LIKE CONCAT('%', #{coachName}, '%')
+        </if>
+        <if test="coachLevel != null and coachLevel != ''">
+            AND coach_level = #{coachLevel}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY rating DESC, create_time DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <!-- 更新教练状态 -->
+    <update id="updateStatus">
+        UPDATE t_coach
+        SET status = #{status}
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 更新教练评分 -->
+    <update id="updateRating">
+        UPDATE t_coach
+        SET rating = #{rating}, total_reviews = #{totalReviews}
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 增加累计学员数 -->
+    <update id="incrementTotalStudents">
+        UPDATE t_coach
+        SET total_students = total_students + #{count}
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+</mapper>
+
+
+

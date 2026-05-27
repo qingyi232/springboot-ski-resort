@@ -1,0 +1,109 @@
+# 服务器配置
+server:
+  port: 8080
+  # 移除 context-path，避免路径冲突
+  # servlet:
+  #   context-path: /api
+
+# Spring配置
+spring:
+  application:
+    name: ski-resort-backend
+  
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ski_resort?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root  # MySQL密码
+    # 连接池配置
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 3000
+    password:  # 如果有密码就填写
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+  
+  # Jackson配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+  
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 100MB
+  
+  # MVC配置（修复Springfox兼容性问题）
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+# MyBatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ski.resort.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+
+# JWT配置
+jwt:
+  secret: ski-resort-secret-key-2025
+  expiration: 604800  # 7天，单位：秒
+  header: Authorization
+  prefix: Bearer
+
+# 日志配置
+logging:
+  level:
+    root: info
+    com.ski.resort: debug
+    com.ski.resort.mapper: debug
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+  file:
+    name: logs/ski-resort.log
+    max-size: 10MB
+    max-history: 30
+
+# Knife4j配置
+knife4j:
+  enable: true
+  setting:
+    language: zh-CN
+
+# 文件存储配置
+file:
+  upload-dir: uploads
+
+# 引入AI配置
+---
+spring:
+  profiles:
+    include: ai
+
+
+

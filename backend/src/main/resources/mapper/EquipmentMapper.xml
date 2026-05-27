@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ski.resort.mapper.EquipmentMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="EquipmentResultMap" type="com.ski.resort.entity.Equipment">
+        <id column="id" property="id"/>
+        <result column="equipment_code" property="equipmentCode"/>
+        <result column="equipment_name" property="equipmentName"/>
+        <result column="equipment_type" property="equipmentType"/>
+        <result column="brand" property="brand"/>
+        <result column="model" property="model"/>
+        <result column="size" property="size"/>
+        <result column="rental_price" property="rentalPrice"/>
+        <result column="purchase_price" property="purchasePrice"/>
+        <result column="purchase_date" property="purchaseDate"/>
+        <result column="status" property="status"/>
+        <result column="stock_quantity" property="stockQuantity"/>
+        <result column="available_quantity" property="availableQuantity"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <!-- 基础查询字段 -->
+    <sql id="BaseColumns">
+        id, equipment_code, equipment_name, equipment_type, brand, model, size,
+        rental_price, purchase_price, purchase_date, status, stock_quantity,
+        available_quantity, image_url, description, create_time, update_time, is_deleted
+    </sql>
+
+    <!-- 根据ID查询雪具 -->
+    <select id="selectById" resultMap="EquipmentResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_equipment
+        WHERE id = #{id} AND is_deleted = 0
+    </select>
+
+    <!-- 根据雪具编号查询 -->
+    <select id="selectByCode" resultMap="EquipmentResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_equipment
+        WHERE equipment_code = #{equipmentCode} AND is_deleted = 0
+    </select>
+
+    <!-- 插入雪具 -->
+    <insert id="insert" parameterType="com.ski.resort.entity.Equipment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_equipment (
+            equipment_code, equipment_name, equipment_type, brand, model, size,
+            rental_price, purchase_price, purchase_date, status, stock_quantity,
+            available_quantity, image_url, description
+        ) VALUES (
+            #{equipmentCode}, #{equipmentName}, #{equipmentType}, #{brand}, #{model}, #{size},
+            #{rentalPrice}, #{purchasePrice}, #{purchaseDate}, #{status}, #{stockQuantity},
+            #{availableQuantity}, #{imageUrl}, #{description}
+        )
+    </insert>
+
+    <!-- 更新雪具 -->
+    <update id="update" parameterType="com.ski.resort.entity.Equipment">
+        UPDATE t_equipment
+        <set>
+            <if test="equipmentCode != null and equipmentCode != ''">equipment_code = #{equipmentCode},</if>
+            <if test="equipmentName != null and equipmentName != ''">equipment_name = #{equipmentName},</if>
+            <if test="equipmentType != null and equipmentType != ''">equipment_type = #{equipmentType},</if>
+            <if test="brand != null and brand != ''">brand = #{brand},</if>
+            <if test="model != null and model != ''">model = #{model},</if>
+            <if test="size != null and size != ''">size = #{size},</if>
+            <if test="rentalPrice != null">rental_price = #{rentalPrice},</if>
+            <if test="purchasePrice != null">purchase_price = #{purchasePrice},</if>
+            <if test="purchaseDate != null">purchase_date = #{purchaseDate},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="stockQuantity != null">stock_quantity = #{stockQuantity},</if>
+            <if test="availableQuantity != null">available_quantity = #{availableQuantity},</if>
+            <if test="imageUrl != null and imageUrl != ''">image_url = #{imageUrl},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+        </set>
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 逻辑删除雪具 -->
+    <update id="deleteById">
+        UPDATE t_equipment
+        SET is_deleted = 1
+        WHERE id = #{id}
+    </update>
+
+    <!-- 查询所有雪具 -->
+    <select id="selectAll" resultMap="EquipmentResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_equipment
+        WHERE is_deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据类型查询雪具列表 -->
+    <select id="selectByType" resultMap="EquipmentResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_equipment
+        WHERE equipment_type = #{equipmentType} AND is_deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 查询可用雪具列表 -->
+    <select id="selectAvailable" resultMap="EquipmentResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_equipment
+        WHERE status = 1 AND available_quantity > 0 AND is_deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 分页查询雪具列表 -->
+    <select id="selectPage" resultMap="EquipmentResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_equipment
+        WHERE is_deleted = 0
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 统计雪具总数 -->
+    <select id="countAll" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_equipment WHERE is_deleted = 0
+    </select>
+
+    <!-- 根据条件统计雪具数 -->
+    <select id="countByCondition" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_equipment
+        WHERE is_deleted = 0
+        <if test="equipmentCode != null and equipmentCode != ''">
+            AND equipment_code LIKE CONCAT('%', #{equipmentCode}, '%')
+        </if>
+        <if test="equipmentName != null and equipmentName != ''">
+            AND equipment_name LIKE CONCAT('%', #{equipmentName}, '%')
+        </if>
+        <if test="equipmentType != null and equipmentType != ''">
+            AND equipment_type = #{equipmentType}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <!-- 根据条件查询雪具列表 -->
+    <select id="selectByCondition" resultMap="EquipmentResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_equipment
+        WHERE is_deleted = 0
+        <if test="equipmentCode != null and equipmentCode != ''">
+            AND equipment_code LIKE CONCAT('%', #{equipmentCode}, '%')
+        </if>
+        <if test="equipmentName != null and equipmentName != ''">
+            AND equipment_name LIKE CONCAT('%', #{equipmentName}, '%')
+        </if>
+        <if test="equipmentType != null and equipmentType != ''">
+            AND equipment_type = #{equipmentType}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY create_time DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <!-- 更新雪具状态 -->
+    <update id="updateStatus">
+        UPDATE t_equipment
+        SET status = #{status}
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 更新可用数量 -->
+    <update id="updateAvailableQuantity">
+        UPDATE t_equipment
+        SET available_quantity = #{quantity}
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 查询库存不足的雪具 -->
+    <select id="selectLowStock" resultMap="EquipmentResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_equipment
+        WHERE available_quantity &lt;= #{threshold} AND is_deleted = 0
+        ORDER BY available_quantity ASC
+    </select>
+
+</mapper>
+
+
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>功能模块图</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: "SimSun", "宋体", serif; 
+            background: #fff; 
+            padding: 40px 20px;
+        }
+        .chart {
+            width: 1100px;
+            margin: 0 auto;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+        .box {
+            border: 1px solid #000;
+            padding: 6px 16px;
+            font-size: 13px;
+            background: #fff;
+            text-align: center;
+        }
+        .vline {
+            width: 1px;
+            height: 25px;
+            background: #000;
+            margin: 0 auto;
+        }
+        .hline-row {
+            display: flex;
+            justify-content: center;
+        }
+        .hline {
+            height: 1px;
+            background: #000;
+        }
+        .level1-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+        .level1-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .level2-section {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+        .level2-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .level2-items {
+            display: flex;
+            justify-content: space-between;
+        }
+        .level2-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .vbox {
+            border: 1px solid #000;
+            padding: 6px 3px;
+            font-size: 12px;
+            background: #fff;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 1px;
+        }
+        .vline-short {
+            width: 1px;
+            height: 18px;
+            background: #000;
+        }
+        .caption {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+<div class="chart">
+    <!-- 顶层节点 -->
+    <div class="row"><div class="box">飞跃滑雪场管理系统</div></div>
+    <div class="vline"></div>
+    
+    <!-- 第一层横线 -->
+    <div class="hline-row"><div class="hline" style="width: 700px;"></div></div>
+    
+    <!-- 第一层三个模块 -->
+    <div class="level1-row" style="width: 700px;">
+        <div class="level1-item">
+            <div class="vline"></div>
+            <div class="box">管理员模块</div>
+        </div>
+        <div class="level1-item">
+            <div class="vline"></div>
+            <div class="box">教练模块</div>
+        </div>
+        <div class="level1-item">
+            <div class="vline"></div>
+            <div class="box">前台用户模块</div>
+        </div>
+    </div>
+    
+    <!-- 第二层 -->
+    <div class="level2-section" style="width: 1050px;">
+        <!-- 管理员模块子功能 -->
+        <div class="level2-group">
+            <div class="vline"></div>
+            <div class="hline" style="width: 370px;"></div>
+            <div class="level2-items" style="width: 370px;">
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">首页</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">用户管理</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">雪具管理</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">租赁订单</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">教练管理</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">预约管理</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">商品管理</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">课程管理</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">场地管理</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">数据统计</div></div>
+            </div>
+        </div>
+        
+        <!-- 教练模块子功能 -->
+        <div class="level2-group">
+            <div class="vline"></div>
+            <div class="hline" style="width: 110px;"></div>
+            <div class="level2-items" style="width: 110px;">
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">首页</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">我的课程</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">学员预约</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">个人中心</div></div>
+            </div>
+        </div>
+        
+        <!-- 前台用户模块子功能 -->
+        <div class="level2-group">
+            <div class="vline"></div>
+            <div class="hline" style="width: 290px;"></div>
+            <div class="level2-items" style="width: 290px;">
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">首页</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">雪具租赁</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">教练预约</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">装备商城</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">滑雪课程</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">场地预约</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">我的订单</div></div>
+                <div class="level2-item"><div class="vline-short"></div><div class="vbox">个人中心</div></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="caption">图 1.1 功能模块图</div>
+</div>
+</body>
+</html>

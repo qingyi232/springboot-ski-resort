@@ -1,0 +1,1 @@
+import{K as e}from"./index-b4f457e8.js";const o=a=>{const t=new FormData;return t.append("file",a),e({url:"/api/v1/upload/image",method:"post",data:t,headers:{"Content-Type":"multipart/form-data"}})},p=a=>e({url:"/api/v1/upload/save-url",method:"post",params:{imageUrl:a}});export{p as s,o as u};

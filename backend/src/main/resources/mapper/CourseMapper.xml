@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ski.resort.mapper.CourseMapper">
+
+    <resultMap id="CourseResultMap" type="com.ski.resort.entity.Course">
+        <id column="id" property="id"/>
+        <result column="course_code" property="courseCode"/>
+        <result column="course_name" property="courseName"/>
+        <result column="course_type" property="courseType"/>
+        <result column="coach_id" property="coachId"/>
+        <result column="coach_name" property="coachName"/>
+        <result column="max_students" property="maxStudents"/>
+        <result column="current_students" property="currentStudents"/>
+        <result column="course_price" property="coursePrice"/>
+        <result column="course_duration" property="courseDuration"/>
+        <result column="total_lessons" property="totalLessons"/>
+        <result column="per_lesson_hours" property="perLessonHours"/>
+        <result column="late_policy" property="latePolicy"/>
+        <result column="course_date" property="courseDate"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="venue_id" property="venueId"/>
+        <result column="venue_name" property="venueName"/>
+        <result column="description" property="description"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="status" property="status"/>
+        <result column="is_hot" property="isHot"/>
+        <result column="difficulty" property="difficulty"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, course_code, course_name, course_type, coach_id, coach_name,
+        max_students, current_students, course_price, course_duration,
+        total_lessons, per_lesson_hours, late_policy,
+        course_date, start_time, end_time, venue_id, venue_name,
+        description, image_url, status, is_hot, difficulty,
+        create_time, update_time, is_deleted
+    </sql>
+
+    <select id="selectById" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE id = #{id} AND is_deleted = 0
+    </select>
+
+    <select id="selectByCode" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE course_code = #{courseCode} AND is_deleted = 0
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_course (course_code, course_name, course_type, coach_id, coach_name,
+            max_students, current_students, course_price, course_duration,
+            total_lessons, per_lesson_hours, late_policy,
+            course_date, start_time, end_time, venue_id, venue_name, description, image_url,
+            status, is_hot, difficulty)
+        VALUES (#{courseCode}, #{courseName}, #{courseType}, #{coachId}, #{coachName},
+            #{maxStudents}, #{currentStudents}, #{coursePrice}, #{courseDuration},
+            #{totalLessons}, #{perLessonHours}, #{latePolicy},
+            #{courseDate}, #{startTime}, #{endTime}, #{venueId}, #{venueName}, #{description}, #{imageUrl},
+            #{status}, #{isHot}, #{difficulty})
+    </insert>
+
+    <update id="update">
+        UPDATE t_course
+        <set>
+            <if test="courseCode != null">course_code = #{courseCode},</if>
+            <if test="courseName != null">course_name = #{courseName},</if>
+            <if test="courseType != null">course_type = #{courseType},</if>
+            <if test="coachId != null">coach_id = #{coachId},</if>
+            <if test="coachName != null">coach_name = #{coachName},</if>
+            <if test="maxStudents != null">max_students = #{maxStudents},</if>
+            <if test="currentStudents != null">current_students = #{currentStudents},</if>
+            <if test="coursePrice != null">course_price = #{coursePrice},</if>
+            <if test="courseDuration != null">course_duration = #{courseDuration},</if>
+            <if test="totalLessons != null">total_lessons = #{totalLessons},</if>
+            <if test="perLessonHours != null">per_lesson_hours = #{perLessonHours},</if>
+            <if test="latePolicy != null">late_policy = #{latePolicy},</if>
+            <if test="courseDate != null">course_date = #{courseDate},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="venueId != null">venue_id = #{venueId},</if>
+            <if test="venueName != null">venue_name = #{venueName},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="imageUrl != null">image_url = #{imageUrl},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isHot != null">is_hot = #{isHot},</if>
+            <if test="difficulty != null">difficulty = #{difficulty},</if>
+        </set>
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE t_course SET is_deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectAll" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE is_deleted = 0 ORDER BY course_date DESC, start_time DESC
+    </select>
+
+    <select id="selectByType" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE course_type = #{courseType} AND is_deleted = 0 ORDER BY course_date DESC
+    </select>
+
+    <select id="selectByCoachId" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE coach_id = #{coachId} AND is_deleted = 0 ORDER BY course_date DESC
+    </select>
+
+    <select id="selectAvailable" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE status = 1 AND current_students &lt; max_students AND is_deleted = 0 ORDER BY course_date ASC
+    </select>
+
+    <select id="selectHot" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE is_hot = 1 AND status = 1 AND is_deleted = 0 ORDER BY current_students DESC LIMIT #{limit}
+    </select>
+
+    <select id="selectPage" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE is_deleted = 0 ORDER BY course_date DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_course WHERE is_deleted = 0
+    </select>
+
+    <select id="countByCondition" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_course WHERE is_deleted = 0
+        <if test="courseCode != null and courseCode != ''">AND course_code LIKE CONCAT('%', #{courseCode}, '%')</if>
+        <if test="courseName != null and courseName != ''">AND course_name LIKE CONCAT('%', #{courseName}, '%')</if>
+        <if test="courseType != null and courseType != ''">AND course_type = #{courseType}</if>
+        <if test="status != null">AND status = #{status}</if>
+    </select>
+
+    <select id="selectByCondition" resultMap="CourseResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_course WHERE is_deleted = 0
+        <if test="courseCode != null and courseCode != ''">AND course_code LIKE CONCAT('%', #{courseCode}, '%')</if>
+        <if test="courseName != null and courseName != ''">AND course_name LIKE CONCAT('%', #{courseName}, '%')</if>
+        <if test="courseType != null and courseType != ''">AND course_type = #{courseType}</if>
+        <if test="status != null">AND status = #{status}</if>
+        ORDER BY course_date DESC
+        <if test="offset != null and limit != null">LIMIT #{offset}, #{limit}</if>
+    </select>
+
+    <update id="updateStatus">
+        UPDATE t_course SET status = #{status} WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="updateCurrentStudents">
+        UPDATE t_course SET current_students = #{count} WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="incrementCurrentStudents">
+        UPDATE t_course SET current_students = current_students + 1 WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="decrementCurrentStudents">
+        UPDATE t_course SET current_students = current_students - 1 WHERE id = #{id} AND is_deleted = 0 AND current_students > 0
+    </update>
+
+</mapper>
+
+
+

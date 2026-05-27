@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ski.resort.mapper.RentalOrderMapper">
+
+    <resultMap id="RentalOrderResultMap" type="com.ski.resort.entity.RentalOrder">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="user_id" property="userId"/>
+        <result column="equipment_id" property="equipmentId"/>
+        <result column="equipment_name" property="equipmentName"/>
+        <result column="rental_start_time" property="rentalStartTime"/>
+        <result column="rental_end_time" property="rentalEndTime"/>
+        <result column="actual_return_time" property="actualReturnTime"/>
+        <result column="rental_hours" property="rentalHours"/>
+        <result column="rental_price" property="rentalPrice"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="deposit" property="deposit"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="payment_status" property="paymentStatus"/>
+        <result column="payment_time" property="paymentTime"/>
+        <result column="payment_method" property="paymentMethod"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, order_no, user_id, equipment_id, equipment_name,
+        rental_start_time, rental_end_time, actual_return_time, rental_hours,
+        rental_price, total_amount, deposit, order_status, payment_status,
+        payment_time, payment_method, create_time, update_time, is_deleted
+    </sql>
+
+    <select id="selectById" resultMap="RentalOrderResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_rental_order WHERE id = #{id} AND is_deleted = 0
+    </select>
+
+    <select id="selectByOrderNo" resultMap="RentalOrderResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_rental_order WHERE order_no = #{orderNo} AND is_deleted = 0
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_rental_order (order_no, user_id, equipment_id, equipment_name,
+            rental_start_time, rental_end_time, actual_return_time, rental_hours, rental_price,
+            total_amount, deposit, order_status, payment_status, payment_time,
+            payment_method)
+        VALUES (#{orderNo}, #{userId}, #{equipmentId}, #{equipmentName},
+            #{rentalStartTime}, #{rentalEndTime}, #{actualReturnTime}, #{rentalHours}, #{rentalPrice},
+            #{totalAmount}, #{deposit}, #{orderStatus}, #{paymentStatus}, #{paymentTime},
+            #{paymentMethod})
+    </insert>
+
+    <update id="update">
+        UPDATE t_rental_order
+        <set>
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="equipmentId != null">equipment_id = #{equipmentId},</if>
+            <if test="equipmentName != null">equipment_name = #{equipmentName},</if>
+            <if test="rentalStartTime != null">rental_start_time = #{rentalStartTime},</if>
+            <if test="rentalEndTime != null">rental_end_time = #{rentalEndTime},</if>
+            <if test="actualReturnTime != null">actual_return_time = #{actualReturnTime},</if>
+            <if test="rentalHours != null">rental_hours = #{rentalHours},</if>
+            <if test="rentalPrice != null">rental_price = #{rentalPrice},</if>
+            <if test="totalAmount != null">total_amount = #{totalAmount},</if>
+            <if test="deposit != null">deposit = #{deposit},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="paymentStatus != null">payment_status = #{paymentStatus},</if>
+            <if test="paymentTime != null">payment_time = #{paymentTime},</if>
+            <if test="paymentMethod != null">payment_method = #{paymentMethod},</if>
+        </set>
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE t_rental_order SET is_deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectAll" resultMap="RentalOrderResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_rental_order WHERE is_deleted = 0 ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByUserId" resultMap="RentalOrderResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_rental_order WHERE user_id = #{userId} AND is_deleted = 0 ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByEquipmentId" resultMap="RentalOrderResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_rental_order WHERE equipment_id = #{equipmentId} AND is_deleted = 0 ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByStatus" resultMap="RentalOrderResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_rental_order WHERE order_status = #{status} AND is_deleted = 0 ORDER BY create_time DESC
+    </select>
+
+    <select id="selectPage" resultMap="RentalOrderResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_rental_order WHERE is_deleted = 0 ORDER BY create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_rental_order WHERE is_deleted = 0
+    </select>
+
+    <select id="countByCondition" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_rental_order WHERE is_deleted = 0
+        <if test="orderNo != null and orderNo != ''">AND order_no LIKE CONCAT('%', #{orderNo}, '%')</if>
+        <if test="userId != null">AND user_id = #{userId}</if>
+        <if test="equipmentId != null">AND equipment_id = #{equipmentId}</if>
+        <if test="status != null">AND order_status = #{status}</if>
+    </select>
+
+    <select id="selectByCondition" resultMap="RentalOrderResultMap">
+        SELECT <include refid="BaseColumns"/> FROM t_rental_order WHERE is_deleted = 0
+        <if test="orderNo != null and orderNo != ''">AND order_no LIKE CONCAT('%', #{orderNo}, '%')</if>
+        <if test="userId != null">AND user_id = #{userId}</if>
+        <if test="equipmentId != null">AND equipment_id = #{equipmentId}</if>
+        <if test="status != null">AND order_status = #{status}</if>
+        ORDER BY create_time DESC
+        <if test="offset != null and limit != null">LIMIT #{offset}, #{limit}</if>
+    </select>
+
+    <update id="updateStatus">
+        UPDATE t_rental_order SET order_status = #{status} WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <update id="updatePaymentStatus">
+        UPDATE t_rental_order SET payment_status = #{paymentStatus} WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+</mapper>
+
+
+

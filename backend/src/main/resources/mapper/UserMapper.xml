@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ski.resort.mapper.UserMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="UserResultMap" type="com.ski.resort.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="real_name" property="realName"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="avatar" property="avatar"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="id_card" property="idCard"/>
+        <result column="role" property="role"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <!-- 基础查询字段 -->
+    <sql id="BaseColumns">
+        id, username, password, real_name, phone, email, avatar, gender, 
+        birthday, id_card, role, status, create_time, update_time, is_deleted
+    </sql>
+
+    <!-- 根据ID查询用户 -->
+    <select id="selectById" resultMap="UserResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_user
+        WHERE id = #{id} AND is_deleted = 0
+    </select>
+
+    <!-- 根据用户名查询用户 -->
+    <select id="selectByUsername" resultMap="UserResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_user
+        WHERE username = #{username} AND is_deleted = 0
+    </select>
+
+    <!-- 根据手机号查询用户 -->
+    <select id="selectByPhone" resultMap="UserResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_user
+        WHERE phone = #{phone} AND is_deleted = 0
+    </select>
+
+    <!-- 插入用户 -->
+    <insert id="insert" parameterType="com.ski.resort.entity.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user (
+            username, password, real_name, phone, email, avatar, gender, 
+            birthday, id_card, role, status
+        ) VALUES (
+            #{username}, #{password}, #{realName}, #{phone}, #{email}, #{avatar}, #{gender}, 
+            #{birthday}, #{idCard}, #{role}, #{status}
+        )
+    </insert>
+
+    <!-- 更新用户 -->
+    <update id="update" parameterType="com.ski.resort.entity.User">
+        UPDATE t_user
+        <set>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="realName != null and realName != ''">real_name = #{realName},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="idCard != null and idCard != ''">id_card = #{idCard},</if>
+            <if test="role != null and role != ''">role = #{role},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = CURRENT_TIMESTAMP
+        </set>
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 逻辑删除用户 -->
+    <update id="deleteById">
+        UPDATE t_user
+        SET is_deleted = 1
+        WHERE id = #{id}
+    </update>
+
+    <!-- 查询所有用户 -->
+    <select id="selectAll" resultMap="UserResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_user
+        WHERE is_deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据角色查询用户列表 -->
+    <select id="selectByRole" resultMap="UserResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_user
+        WHERE role = #{role} AND is_deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 分页查询用户列表 -->
+    <select id="selectPage" resultMap="UserResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_user
+        WHERE is_deleted = 0
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 统计用户总数 -->
+    <select id="countAll" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_user WHERE is_deleted = 0
+    </select>
+
+    <!-- 根据条件统计用户数 -->
+    <select id="countByCondition" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_user
+        WHERE is_deleted = 0
+        <if test="username != null and username != ''">
+            AND username LIKE CONCAT('%', #{username}, '%')
+        </if>
+        <if test="realName != null and realName != ''">
+            AND real_name LIKE CONCAT('%', #{realName}, '%')
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="role != null and role != ''">
+            AND role = #{role}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <!-- 根据条件查询用户列表 -->
+    <select id="selectByCondition" resultMap="UserResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM t_user
+        WHERE is_deleted = 0
+        <if test="username != null and username != ''">
+            AND username LIKE CONCAT('%', #{username}, '%')
+        </if>
+        <if test="realName != null and realName != ''">
+            AND real_name LIKE CONCAT('%', #{realName}, '%')
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="role != null and role != ''">
+            AND role = #{role}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY create_time DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+</mapper>
+
+
+

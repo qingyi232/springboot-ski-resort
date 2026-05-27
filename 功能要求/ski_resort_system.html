@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于Spring Boot的飞跃滑雪场管理系统 - 功能架构图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
+        .system-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .module-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .core-business { border-left-color: #e74c3c; }
+        .user-management { border-left-color: #3498db; }
+        .ai-features { border-left-color: #9b59b6; }
+        .data-analysis { border-left-color: #27ae60; }
+        .system-management { border-left-color: #f39c12; }
+        
+        .module-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .module-icon {
+            font-size: 1.5em;
+        }
+        
+        .function-list {
+            list-style: none;
+        }
+        
+        .function-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .function-item:last-child {
+            border-bottom: none;
+        }
+        
+        .function-item::before {
+            content: "▶";
+            color: #3498db;
+            font-size: 0.8em;
+        }
+        
+        .architecture-diagram {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .arch-title {
+            text-align: center;
+            font-size: 1.6em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        
+        .layer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .presentation-layer {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+        }
+        
+        .business-layer {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+        }
+        
+        .data-layer {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+            color: white;
+        }
+        
+        .layer-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        
+        .layer-content {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .layer-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        
+        .arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        
+        .features-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .features-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .highlight-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .highlight-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .database-schema {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .schema-title {
+            text-align: center;
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .table-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+        
+        .table-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .table-desc {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2em;
+            }
+            
+            .system-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-stack {
+                justify-content: center;
+            }
+            
+            .layer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎿 飞跃滑雪场管理系统</h1>
+            <p class="subtitle">基于Spring Boot的智能化管理平台 - 本科毕设项目</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Spring Boot</span>
+                <span class="tech-tag">Vue.js</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">Redis</span>
+                <span class="tech-tag">MyBatis</span>
+                <span class="tech-tag">Element UI</span>
+                <span class="tech-tag">ECharts</span>
+                <span class="tech-tag">AI集成</span>
+            </div>
+        </div>
+
+        <div class="system-overview">
+            <div class="module-card core-business">
+                <div class="module-title">
+                    <span class="module-icon">🏂</span>
+                    核心业务模块
+                </div>
+                <ul class="function-list">
+                    <li class="function-item">雪具租赁管理</li>
+                    <li class="function-item">滑雪装备销售</li>
+                    <li class="function-item">教练预约系统</li>
+                    <li class="function-item">课程管理</li>
+                    <li class="function-item">场地管理</li>
+                    <li class="function-item">订单管理</li>
+                    <li class="function-item">库存管理</li>
+                </ul>
+            </div>
+
+            <div class="module-card user-management">
+                <div class="module-title">
+                    <span class="module-icon">👥</span>
+                    用户管理模块
+                </div>
+                <ul class="function-list">
+                    <li class="function-item">用户注册登录</li>
+                    <li class="function-item">会员管理</li>
+                    <li class="function-item">权限控制</li>
+                    <li class="function-item">用户画像</li>
+                    <li class="function-item">积分系统</li>
+                    <li class="function-item">消息通知</li>
+                </ul>
+            </div>
+
+            <div class="module-card ai-features">
+                <div class="module-title">
+                    <span class="module-icon">🤖</span>
+                    AI智能模块
+                </div>
+                <ul class="function-list">
+                    <li class="function-item">智能推荐系统</li>
+                    <li class="function-item">智能客服机器人</li>
+                    <li class="function-item">智能数据分析</li>
+                    <li class="function-item">个性化服务</li>
+                </ul>
+            </div>
+
+            <div class="module-card data-analysis">
+                <div class="module-title">
+                    <span class="module-icon">📊</span>
+                    数据分析模块
+                </div>
+                <ul class="function-list">
+                    <li class="function-item">经营数据统计</li>
+                    <li class="function-item">财务报表</li>
+                    <li class="function-item">用户行为分析</li>
+                    <li class="function-item">销售趋势</li>
+                    <li class="function-item">可视化大屏</li>
+                    <li class="function-item">预测分析</li>
+                </ul>
+            </div>
+
+            <div class="module-card system-management">
+                <div class="module-title">
+                    <span class="module-icon">⚙️</span>
+                    系统管理模块
+                </div>
+                <ul class="function-list">
+                    <li class="function-item">系统配置</li>
+                    <li class="function-item">日志管理</li>
+                    <li class="function-item">数据备份</li>
+                    <li class="function-item">安全监控</li>
+                    <li class="function-item">系统监控</li>
+                    <li class="function-item">定时任务</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="architecture-diagram">
+            <h3 class="arch-title">🏗️ 系统架构图</h3>
+            
+            <div class="layer presentation-layer">
+                <div>
+                    <div class="layer-title">表现层 (Presentation Layer)</div>
+                    <div class="layer-content">
+                        <div class="layer-item">Vue.js前端</div>
+                        <div class="layer-item">Element UI</div>
+                        <div class="layer-item">管理后台</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">↓</div>
+            
+            <div class="layer business-layer">
+                <div>
+                    <div class="layer-title">业务层 (Business Layer)</div>
+                    <div class="layer-content">
+                        <div class="layer-item">Spring Boot</div>
+                        <div class="layer-item">Spring Security</div>
+                        <div class="layer-item">业务逻辑</div>
+                        <div class="layer-item">API接口</div>
+                        <div class="layer-item">AI服务</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">↓</div>
+            
+            <div class="layer data-layer">
+                <div>
+                    <div class="layer-title">数据层 (Data Layer)</div>
+                    <div class="layer-content">
+                        <div class="layer-item">MySQL</div>
+                        <div class="layer-item">Redis缓存</div>
+                        <div class="layer-item">MyBatis</div>
+                        <div class="layer-item">文件存储</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="database-schema">
+            <h3 class="schema-title">🗄️ 数据库设计</h3>
+            <div class="tables-grid">
+                <div class="table-card">
+                    <div class="table-name">用户表 (sys_user)</div>
+                    <div class="table-desc">用户基本信息、会员等级</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">雪具表 (equipment)</div>
+                    <div class="table-desc">雪具信息、库存状态</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">租赁订单 (rental_order)</div>
+                    <div class="table-desc">租赁记录、费用计算</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">教练表 (coach)</div>
+                    <div class="table-desc">教练信息、技能等级</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">预约表 (appointment)</div>
+                    <div class="table-desc">预约记录、时间安排</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">商品表 (product)</div>
+                    <div class="table-desc">滑雪装备商品信息</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">销售订单 (sale_order)</div>
+                    <div class="table-desc">商品销售记录</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">薪资表 (salary)</div>
+                    <div class="table-desc">员工薪资、提成计算</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">会员卡 (membership)</div>
+                    <div class="table-desc">会员卡类型、权益</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">课程表 (course)</div>
+                    <div class="table-desc">滑雪课程信息</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">场地表 (venue)</div>
+                    <div class="table-desc">滑雪场地管理</div>
+                </div>
+                <div class="table-card">
+                    <div class="table-name">系统日志 (sys_log)</div>
+                    <div class="table-desc">操作日志记录</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-highlight">
+            <h3 class="features-title">✨ 项目技术亮点</h3>
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <div class="highlight-icon">🚀</div>
+                    <h4>微服务架构</h4>
+                    <p>Spring Boot + Spring Cloud</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">⚡</div>
+                    <h4>缓存优化</h4>
+                    <p>Redis多级缓存策略</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">🧠</div>
+                    <h4>AI智能</h4>
+                    <p>大模型API集成应用</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">📱</div>
+                    <h4>响应式设计</h4>
+                    <p>适配不同屏幕尺寸</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">🔒</div>
+                    <h4>安全机制</h4>
+                    <p>JWT + Spring Security</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">📈</div>
+                    <h4>数据可视化</h4>
+                    <p>ECharts图表展示</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

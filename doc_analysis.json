@@ -1,0 +1,1709 @@
+{
+  "total_paragraphs": 336,
+  "total_tables": 19,
+  "tables": [
+    {
+      "index": 1,
+      "rows": 6,
+      "cols": 2,
+      "first_cell": "姓    名:",
+      "content": [
+        [
+          "姓    名:",
+          "董孟格"
+        ],
+        [
+          "学    号: ",
+          "225150201025"
+        ],
+        [
+          "学    院:",
+          "人工智能学院"
+        ],
+        [
+          "专    业:",
+          "软件工程专业"
+        ],
+        [
+          "班    级:",
+          "软件工程22-1"
+        ],
+        [
+          "指导教师:",
+          "朱倩倩（讲师） "
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "rows": 8,
+      "cols": 3,
+      "first_cell": "用例编号",
+      "content": [
+        [
+          "用例编号",
+          "用例名称",
+          "用例描述"
+        ],
+        [
+          "UC-A01",
+          "登录系统",
+          "输入用户名和密码登录后台"
+        ],
+        [
+          "UC-A02",
+          "用户管理",
+          "查看、新增、编辑、删除用户"
+        ],
+        [
+          "UC-A03",
+          "教练管理",
+          "新增、编辑教练信息"
+        ],
+        [
+          "UC-A04",
+          "课程管理",
+          "发布、编辑课程"
+        ],
+        [
+          "UC-A05",
+          "场地管理",
+          "新增、编辑场地"
+        ],
+        [
+          "UC-A06",
+          "商品管理",
+          "管理商品信息和库存"
+        ],
+        [
+          "UC-A07",
+          "数据统计",
+          "查看运营数据和图表"
+        ]
+      ]
+    },
+    {
+      "index": 3,
+      "rows": 6,
+      "cols": 3,
+      "first_cell": "用例编号",
+      "content": [
+        [
+          "用例编号",
+          "用例名称",
+          "用例描述"
+        ],
+        [
+          "UC-C01",
+          "登录系统",
+          "教练登录后台"
+        ],
+        [
+          "UC-C02",
+          "查看我的课程",
+          "查看自己教授的课程"
+        ],
+        [
+          "UC-C03",
+          "管理学员预约",
+          "确认或取消预约"
+        ],
+        [
+          "UC-C04",
+          "查看统计",
+          "查看个人数据"
+        ],
+        [
+          "UC-C05",
+          "编辑个人信息",
+          "修改资料和密码"
+        ]
+      ]
+    },
+    {
+      "index": 4,
+      "rows": 6,
+      "cols": 3,
+      "first_cell": "用例编号",
+      "content": [
+        [
+          "用例编号",
+          "用例名称",
+          "用例描述"
+        ],
+        [
+          "UC-S01",
+          "登录系统",
+          "工作人员登录后台"
+        ],
+        [
+          "UC-S02",
+          "办理租赁",
+          "为用户办理商品租赁"
+        ],
+        [
+          "UC-S03",
+          "办理归还",
+          "确认归还并更新订单"
+        ],
+        [
+          "UC-S04",
+          "订单管理",
+          "查看和处理租赁订单"
+        ],
+        [
+          "UC-S05",
+          "库存管理",
+          "查看和更新商品库存"
+        ]
+      ]
+    },
+    {
+      "index": 5,
+      "rows": 8,
+      "cols": 3,
+      "first_cell": "用例编号",
+      "content": [
+        [
+          "用例编号",
+          "用例名称",
+          "用例描述"
+        ],
+        [
+          "UC-U01",
+          "注册/登录",
+          "注册新账号或登录"
+        ],
+        [
+          "UC-U02",
+          "租赁商品",
+          "浏览商品并提交租赁订单"
+        ],
+        [
+          "UC-U03",
+          "预约教练",
+          "浏览教练并提交预约"
+        ],
+        [
+          "UC-U04",
+          "报名课程",
+          "浏览课程并报名"
+        ],
+        [
+          "UC-U05",
+          "预约场地",
+          "查看场地并预约"
+        ],
+        [
+          "UC-U06",
+          "查看订单",
+          "查看租赁和预约记录"
+        ],
+        [
+          "UC-U07",
+          "管理个人信息",
+          "修改个人资料和密码"
+        ]
+      ]
+    },
+    {
+      "index": 6,
+      "rows": 8,
+      "cols": 2,
+      "first_cell": "包名",
+      "content": [
+        [
+          "包名",
+          "说明"
+        ],
+        [
+          "com.ski.resort.controller",
+          "控制层，处理HTTP请求"
+        ],
+        [
+          "com.ski.resort.service",
+          "业务层，处理业务逻辑"
+        ],
+        [
+          "com.ski.resort.mapper",
+          "数据层，操作数据库"
+        ],
+        [
+          "com.ski.resort.entity",
+          "实体层，数据库表对应的Java类"
+        ],
+        [
+          "com.ski.resort.common",
+          "公共类，Result统一返回类等"
+        ],
+        [
+          "com.ski.resort.config",
+          "配置类，安全、缓存、跨域配置"
+        ],
+        [
+          "com.ski.resort.util",
+          "工具类，JWT、Redis工具等"
+        ]
+      ]
+    },
+    {
+      "index": 7,
+      "rows": 9,
+      "cols": 4,
+      "first_cell": "字段名",
+      "content": [
+        [
+          "字段名",
+          "数据类型",
+          "可否为空",
+          "说明"
+        ],
+        [
+          "id",
+          "BIGINT",
+          "否（主键）",
+          "用户ID，自增"
+        ],
+        [
+          "username",
+          "VARCHAR(50)",
+          "否",
+          "用户名，唯一"
+        ],
+        [
+          "password",
+          "VARCHAR(255)",
+          "否",
+          "密码（BCrypt加密）"
+        ],
+        [
+          "real_name",
+          "VARCHAR(100)",
+          "是",
+          "真实姓名"
+        ],
+        [
+          "phone",
+          "VARCHAR(20)",
+          "是",
+          "手机号"
+        ],
+        [
+          "role",
+          "VARCHAR(20)",
+          "否",
+          "角色：admin/user/coach/staff"
+        ],
+        [
+          "status",
+          "TINYINT",
+          "是",
+          "状态：0禁用，1正常"
+        ],
+        [
+          "create_time",
+          "DATETIME",
+          "是",
+          "创建时间"
+        ]
+      ]
+    },
+    {
+      "index": 8,
+      "rows": 11,
+      "cols": 4,
+      "first_cell": "字段名",
+      "content": [
+        [
+          "字段名",
+          "数据类型",
+          "可否为空",
+          "说明"
+        ],
+        [
+          "id",
+          "BIGINT",
+          "否（主键）",
+          "商品ID，自增"
+        ],
+        [
+          "product_code",
+          "VARCHAR(50)",
+          "否",
+          "商品编号，唯一"
+        ],
+        [
+          "product_name",
+          "VARCHAR(100)",
+          "否",
+          "商品名称"
+        ],
+        [
+          "category",
+          "VARCHAR(50)",
+          "否",
+          "分类：雪具/装备/配件"
+        ],
+        [
+          "brand",
+          "VARCHAR(100)",
+          "是",
+          "品牌"
+        ],
+        [
+          "rental_price",
+          "DECIMAL(10,2)",
+          "是",
+          "租赁价格（元/小时）"
+        ],
+        [
+          "sale_price",
+          "DECIMAL(10,2)",
+          "是",
+          "销售价格"
+        ],
+        [
+          "stock_quantity",
+          "INT",
+          "是",
+          "库存数量"
+        ],
+        [
+          "available_quantity",
+          "INT",
+          "是",
+          "可用数量"
+        ],
+        [
+          "status",
+          "TINYINT",
+          "是",
+          "状态：0下架，1上架"
+        ]
+      ]
+    },
+    {
+      "index": 9,
+      "rows": 9,
+      "cols": 4,
+      "first_cell": "字段名",
+      "content": [
+        [
+          "字段名",
+          "数据类型",
+          "可否为空",
+          "说明"
+        ],
+        [
+          "id",
+          "BIGINT",
+          "否（主键）",
+          "教练ID，自增"
+        ],
+        [
+          "user_id",
+          "BIGINT",
+          "是",
+          "关联用户ID"
+        ],
+        [
+          "coach_name",
+          "VARCHAR(50)",
+          "否",
+          "教练姓名"
+        ],
+        [
+          "coach_level",
+          "VARCHAR(20)",
+          "否",
+          "等级：初级/中级/高级"
+        ],
+        [
+          "specialty",
+          "VARCHAR(200)",
+          "是",
+          "专长"
+        ],
+        [
+          "hourly_rate",
+          "DECIMAL(10,2)",
+          "否",
+          "课时费"
+        ],
+        [
+          "rating",
+          "DECIMAL(3,2)",
+          "是",
+          "评分"
+        ],
+        [
+          "status",
+          "TINYINT",
+          "是",
+          "状态：0休假，1在职"
+        ]
+      ]
+    },
+    {
+      "index": 10,
+      "rows": 10,
+      "cols": 4,
+      "first_cell": "字段名",
+      "content": [
+        [
+          "字段名",
+          "数据类型",
+          "可否为空",
+          "说明"
+        ],
+        [
+          "id",
+          "BIGINT",
+          "否（主键）",
+          "课程ID，自增"
+        ],
+        [
+          "course_name",
+          "VARCHAR(100)",
+          "否",
+          "课程名称"
+        ],
+        [
+          "course_type",
+          "VARCHAR(50)",
+          "否",
+          "类型：初级/中级/高级"
+        ],
+        [
+          "coach_id",
+          "BIGINT",
+          "否",
+          "教练ID"
+        ],
+        [
+          "max_students",
+          "INT",
+          "否",
+          "最大学员数"
+        ],
+        [
+          "current_students",
+          "INT",
+          "是",
+          "当前报名人数"
+        ],
+        [
+          "course_price",
+          "DECIMAL(10,2)",
+          "否",
+          "课程价格"
+        ],
+        [
+          "venue_id",
+          "BIGINT",
+          "是",
+          "场地ID"
+        ],
+        [
+          "status",
+          "TINYINT",
+          "是",
+          "状态：0未开始~3已结束"
+        ]
+      ]
+    },
+    {
+      "index": 11,
+      "rows": 8,
+      "cols": 4,
+      "first_cell": "字段名",
+      "content": [
+        [
+          "字段名",
+          "数据类型",
+          "可否为空",
+          "说明"
+        ],
+        [
+          "id",
+          "BIGINT",
+          "否（主键）",
+          "场地ID，自增"
+        ],
+        [
+          "venue_name",
+          "VARCHAR(100)",
+          "否",
+          "场地名称"
+        ],
+        [
+          "venue_type",
+          "VARCHAR(50)",
+          "否",
+          "类型：雪道/练习场"
+        ],
+        [
+          "difficulty_level",
+          "VARCHAR(20)",
+          "是",
+          "难度等级"
+        ],
+        [
+          "max_capacity",
+          "INT",
+          "是",
+          "最大容纳人数"
+        ],
+        [
+          "rental_price",
+          "DECIMAL(10,2)",
+          "是",
+          "租赁价格"
+        ],
+        [
+          "status",
+          "TINYINT",
+          "是",
+          "状态：0维护中，1开放"
+        ]
+      ]
+    },
+    {
+      "index": 12,
+      "rows": 9,
+      "cols": 4,
+      "first_cell": "字段名",
+      "content": [
+        [
+          "字段名",
+          "数据类型",
+          "可否为空",
+          "说明"
+        ],
+        [
+          "id",
+          "BIGINT",
+          "否（主键）",
+          "订单ID，自增"
+        ],
+        [
+          "order_no",
+          "VARCHAR(50)",
+          "否",
+          "订单号，唯一"
+        ],
+        [
+          "user_id",
+          "BIGINT",
+          "否",
+          "用户ID"
+        ],
+        [
+          "product_id",
+          "BIGINT",
+          "否",
+          "商品ID"
+        ],
+        [
+          "rental_start_time",
+          "DATETIME",
+          "否",
+          "租赁开始时间"
+        ],
+        [
+          "rental_end_time",
+          "DATETIME",
+          "是",
+          "归还时间"
+        ],
+        [
+          "total_amount",
+          "DECIMAL(10,2)",
+          "否",
+          "总金额"
+        ],
+        [
+          "order_status",
+          "TINYINT",
+          "是",
+          "状态：0待支付~3已取消"
+        ]
+      ]
+    },
+    {
+      "index": 13,
+      "rows": 9,
+      "cols": 4,
+      "first_cell": "模块",
+      "content": [
+        [
+          "模块",
+          "请求方式",
+          "接口路径",
+          "功能说明"
+        ],
+        [
+          "用户",
+          "POST",
+          "/api/v1/users/login",
+          "用户登录"
+        ],
+        [
+          "用户",
+          "POST",
+          "/api/v1/users/register",
+          "用户注册"
+        ],
+        [
+          "商品",
+          "GET",
+          "/api/v1/products/list",
+          "查询商品列表"
+        ],
+        [
+          "教练",
+          "GET",
+          "/coach/list",
+          "查询教练列表"
+        ],
+        [
+          "课程",
+          "GET",
+          "/api/v1/courses/list",
+          "查询课程列表"
+        ],
+        [
+          "租赁",
+          "POST",
+          "/rental-order",
+          "创建租赁订单"
+        ],
+        [
+          "租赁",
+          "PUT",
+          "/rental-order/{id}/return",
+          "归还商品"
+        ],
+        [
+          "统计",
+          "GET",
+          "/api/v1/dashboard/overview",
+          "获取统计概览"
+        ]
+      ]
+    },
+    {
+      "index": 14,
+      "rows": 10,
+      "cols": 2,
+      "first_cell": "名称",
+      "content": [
+        [
+          "名称",
+          "版本/说明"
+        ],
+        [
+          "操作系统",
+          "Windows 10/11"
+        ],
+        [
+          "开发工具（后端）",
+          "IntelliJ IDEA 2023"
+        ],
+        [
+          "开发工具（前端）",
+          "Visual Studio Code"
+        ],
+        [
+          "JDK",
+          "17"
+        ],
+        [
+          "Maven",
+          "3.9"
+        ],
+        [
+          "Node.js",
+          "18.x"
+        ],
+        [
+          "MySQL",
+          "8.0"
+        ],
+        [
+          "Redis",
+          "5.0+"
+        ],
+        [
+          "浏览器",
+          "Chrome 120"
+        ]
+      ]
+    },
+    {
+      "index": 15,
+      "rows": 8,
+      "cols": 2,
+      "first_cell": "项目",
+      "content": [
+        [
+          "项目",
+          "配置"
+        ],
+        [
+          "操作系统",
+          "Windows 11"
+        ],
+        [
+          "处理器",
+          "Intel Core i5"
+        ],
+        [
+          "内存",
+          "16GB"
+        ],
+        [
+          "浏览器",
+          "Chrome 120"
+        ],
+        [
+          "后端环境",
+          "JDK 17 + Tomcat(内嵌)"
+        ],
+        [
+          "数据库",
+          "MySQL 8.0"
+        ],
+        [
+          "缓存",
+          "Redis 7.0"
+        ]
+      ]
+    },
+    {
+      "index": 16,
+      "rows": 7,
+      "cols": 5,
+      "first_cell": "编号",
+      "content": [
+        [
+          "编号",
+          "测试项",
+          "预期结果",
+          "实际结果",
+          "是否通过"
+        ],
+        [
+          "T-U01",
+          "管理员登录",
+          "跳转后台首页",
+          "跳转/admin/dashboard",
+          "通过"
+        ],
+        [
+          "T-U02",
+          "错误密码登录",
+          "提示密码错误",
+          "提示错误",
+          "通过"
+        ],
+        [
+          "T-U03",
+          "普通用户登录",
+          "跳转前台首页",
+          "跳转/home",
+          "通过"
+        ],
+        [
+          "T-U04",
+          "用户注册",
+          "注册成功",
+          "提示成功",
+          "通过"
+        ],
+        [
+          "T-U05",
+          "重复用户名注册",
+          "提示已存在",
+          "提示失败",
+          "通过"
+        ],
+        [
+          "T-U06",
+          "工作人员登录",
+          "跳转后台首页",
+          "跳转后台",
+          "通过"
+        ]
+      ]
+    },
+    {
+      "index": 17,
+      "rows": 6,
+      "cols": 5,
+      "first_cell": "编号",
+      "content": [
+        [
+          "编号",
+          "测试项",
+          "预期结果",
+          "实际结果",
+          "是否通过"
+        ],
+        [
+          "T-P01",
+          "查看商品列表",
+          "显示分页列表",
+          "正确显示",
+          "通过"
+        ],
+        [
+          "T-P02",
+          "新增商品",
+          "新增成功",
+          "成功",
+          "通过"
+        ],
+        [
+          "T-P03",
+          "条件搜索",
+          "筛选结果正确",
+          "正确",
+          "通过"
+        ],
+        [
+          "T-P04",
+          "用户租赁商品",
+          "创建订单并扣库存",
+          "正确",
+          "通过"
+        ],
+        [
+          "T-P05",
+          "归还商品",
+          "状态变更库存恢复",
+          "正确",
+          "通过"
+        ]
+      ]
+    },
+    {
+      "index": 18,
+      "rows": 7,
+      "cols": 5,
+      "first_cell": "编号",
+      "content": [
+        [
+          "编号",
+          "测试项",
+          "预期结果",
+          "实际结果",
+          "是否通过"
+        ],
+        [
+          "T-C01",
+          "查看教练列表",
+          "显示在职教练",
+          "正确",
+          "通过"
+        ],
+        [
+          "T-C02",
+          "提交预约",
+          "创建成功",
+          "成功",
+          "通过"
+        ],
+        [
+          "T-C03",
+          "教练确认预约",
+          "状态变为已确认",
+          "正确",
+          "通过"
+        ],
+        [
+          "T-CR01",
+          "查看课程列表",
+          "显示可报名课程",
+          "正确",
+          "通过"
+        ],
+        [
+          "T-CR02",
+          "报名课程",
+          "报名成功人数+1",
+          "成功",
+          "通过"
+        ],
+        [
+          "T-V01",
+          "预约场地",
+          "预约创建成功",
+          "成功",
+          "通过"
+        ]
+      ]
+    },
+    {
+      "index": 19,
+      "rows": 6,
+      "cols": 4,
+      "first_cell": "接口",
+      "content": [
+        [
+          "接口",
+          "说明",
+          "平均响应时间",
+          "是否达标(<2s)"
+        ],
+        [
+          "POST /users/login",
+          "用户登录",
+          "156ms",
+          "是"
+        ],
+        [
+          "GET /products/page",
+          "商品列表",
+          "72ms",
+          "是"
+        ],
+        [
+          "GET /coach/list",
+          "教练列表",
+          "65ms",
+          "是"
+        ],
+        [
+          "GET /courses/list",
+          "课程列表",
+          "48ms",
+          "是"
+        ],
+        [
+          "GET /dashboard/overview",
+          "统计概览",
+          "210ms",
+          "是"
+        ]
+      ]
+    }
+  ],
+  "sections": [],
+  "images": [],
+  "code_blocks": [],
+  "chapter5_elements": [
+    {
+      "type": "paragraph",
+      "index": 183,
+      "style": "Heading 1",
+      "text": "第5章　系统实现",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 184,
+      "style": "Heading 2",
+      "text": "5.1　开发环境",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 185,
+      "style": "Normal",
+      "text": "在正式开始编码之前，需要先搭建好开发环境。后端使用IntelliJ IDEA作为开发工具，通过Maven管理项目依赖。项目创建时使用Spring Initializr初始化，勾选了Web、MyBati",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 186,
+      "style": "Normal",
+      "text": "表5.1　开发环境配置",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "table",
+      "table_index": 14,
+      "rows": 10,
+      "cols": 2,
+      "first_cell": "名称"
+    },
+    {
+      "type": "paragraph",
+      "index": 188,
+      "style": "Heading 2",
+      "text": "5.2　用户登录模块的实现",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 189,
+      "style": "Normal",
+      "text": "用户登录是系统的入口功能。前端登录页面采用了左右分栏的布局，左侧展示系统名称和特色功能介绍，右侧是登录和注册的表单区域，支持在登录和注册两个Tab页之间切换。登录表单中用到了Element Plus的",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 190,
+      "style": "Normal",
+      "text": "登录的具体流程如下：用户输入用户名和密码后点击登录按钮，前端先对表单进行校验（用户名和密码不能为空），校验通过后通过Axios向后端发送POST请求。后端UserController接收到请求后，调用",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 191,
+      "style": "Normal",
+      "text": "",
+      "has_image": true,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 192,
+      "style": "Normal",
+      "text": "图5.1　用户登录页面",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 193,
+      "style": "Normal",
+      "text": "@PostMapping(\"/login\")",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 194,
+      "style": "Normal",
+      "text": "public Result<Map<String, Object>> login(@RequestBody LoginDTO loginDTO) {",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 195,
+      "style": "Normal",
+      "text": "    User user = userService.login(",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 196,
+      "style": "Normal",
+      "text": "        loginDTO.getUsername(), loginDTO.getPassword());",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 197,
+      "style": "Normal",
+      "text": "    String token = JwtUtil.generateToken(",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 198,
+      "style": "Normal",
+      "text": "        user.getId(), user.getUsername(), user.getRole());",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 199,
+      "style": "Normal",
+      "text": "    Map<String, Object> data = new HashMap<>();",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 200,
+      "style": "Normal",
+      "text": "    data.put(\"token\", token);",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 201,
+      "style": "Normal",
+      "text": "    data.put(\"userInfo\", user);",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 202,
+      "style": "Normal",
+      "text": "    return Result.success(\"登录成功\", data);",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 203,
+      "style": "Normal",
+      "text": "}",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 204,
+      "style": "Normal",
+      "text": "JWT Token生成方法，将用户信息写入Token并设置7天有效期：",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 205,
+      "style": "Normal",
+      "text": "public static String generateToken(Long userId, String username, String role) {",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 206,
+      "style": "Normal",
+      "text": "    Map<String, Object> claims = new HashMap<>();",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 207,
+      "style": "Normal",
+      "text": "    claims.put(\"userId\", userId);",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 208,
+      "style": "Normal",
+      "text": "    claims.put(\"username\", username);",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 209,
+      "style": "Normal",
+      "text": "    claims.put(\"role\", role);",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 210,
+      "style": "Normal",
+      "text": "    return Jwts.builder().setClaims(claims).setSubject(username)",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 211,
+      "style": "Normal",
+      "text": "        .setExpiration(new Date(System.currentTimeMillis() + 7*24*3600*1000))",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 212,
+      "style": "Normal",
+      "text": "        .signWith(getSecretKey(), SignatureAlgorithm.HS256).compact();",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 213,
+      "style": "Normal",
+      "text": "}",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 214,
+      "style": "Heading 2",
+      "text": "5.3　商品管理模块的实现",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 215,
+      "style": "Normal",
+      "text": "商品管理模块是系统的核心业务模块之一，统一管理滑雪场的雪具和装备信息。在本系统的设计中，雪具（如滑雪板、雪鞋、头盔等）和装备（如护具、雪镜等）统一放在一张商品表中管理，通过category字段区分是雪",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 216,
+      "style": "Normal",
+      "text": "管理员和工作人员可以在后台的商品管理页面对商品进行增删改查操作。页面顶部有搜索区域，可以按商品名称和分类进行筛选查询。列表使用了Element Plus的el-table组件来展示数据，支持分页功能，",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 217,
+      "style": "Normal",
+      "text": "",
+      "has_image": true,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 218,
+      "style": "Normal",
+      "text": "图5.2　商品管理页面",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 219,
+      "style": "Normal",
+      "text": "@GetMapping(\"/page/condition\")",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 220,
+      "style": "Normal",
+      "text": "public Result<PageResult<Product>> getByCondition(",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 221,
+      "style": "Normal",
+      "text": "        @RequestParam(defaultValue = \"1\") Integer page,",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 222,
+      "style": "Normal",
+      "text": "        @RequestParam(defaultValue = \"10\") Integer pageSize,",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 223,
+      "style": "Normal",
+      "text": "        @RequestParam(required = false) String name,",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 224,
+      "style": "Normal",
+      "text": "        @RequestParam(required = false) String category) {",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 225,
+      "style": "Normal",
+      "text": "    return Result.success(",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 226,
+      "style": "Normal",
+      "text": "        productService.pageByCondition(page, pageSize, name, category));",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 227,
+      "style": "Normal",
+      "text": "}",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 228,
+      "style": "Normal",
+      "text": "用户端以卡片形式展示可租赁的商品，每张卡片显示商品图片、名称、品牌、租赁价格等信息。用户选择商品后指定租赁时间和数量，系统自动计算租赁费用并生成订单。订单创建时系统自动扣减商品的可用数量，归还时再加回",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 229,
+      "style": "Heading 2",
+      "text": "5.4　教练预约模块的实现",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 230,
+      "style": "Normal",
+      "text": "教练预约涉及管理员、教练和用户三个角色。管理员在后台维护教练的基本信息，包括姓名、等级、专长、课时费等。教练列表页面支持按姓名、等级和状态进行筛选查询。",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 231,
+      "style": "Normal",
+      "text": "用户端的教练预约页面展示了所有在职教练的信息。用户选择教练后，需要指定预约日期、开始时间和结束时间，系统根据教练的课时费和预约时长自动计算费用。提交预约后状态为“待确认”。教练登录后可在“员预约”面查",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 232,
+      "style": "Normal",
+      "text": "\n图5.3　教练预约页面",
+      "has_image": true,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 234,
+      "style": "Normal",
+      "text": "@GetMapping(\"/my-bookings\")",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 235,
+      "style": "Normal",
+      "text": "public Result<List<CoachBooking>> getMyBookings() {",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 236,
+      "style": "Normal",
+      "text": "    Long userId = SecurityUtils.getCurrentUserId();",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 237,
+      "style": "Normal",
+      "text": "    Coach coach = coachService.getByUserId(userId);",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 238,
+      "style": "Normal",
+      "text": "    return Result.success(",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 239,
+      "style": "Normal",
+      "text": "        coachBookingService.getByCoachId(coach.getId()));",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 240,
+      "style": "Normal",
+      "text": "}",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 241,
+      "style": "Heading 2",
+      "text": "5.5　课程与场地模块的实现",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 242,
+      "style": "Normal",
+      "text": "课程管理模块包含课程的发布管理和学员的报名功能。管理员在后台可以发布新课程，需要填写课程名称、类型（初级入门/中级进阶/高级提升）、授课教练、开课日期、上课时间、场地、最大学员数和价格等信息。添加课程",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 243,
+      "style": "Normal",
+      "text": "场地管理比较简单。管理员可以在后台录入和编辑场地信息，包括场地名称、类型、难度等级和容纳人数。系统预置了初级雪道、中级雪道、高级雪道和自由式公园等场地数据。雪道类型的场地包含在门票里不用另外收费，自由",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 244,
+      "style": "Normal",
+      "text": "在工作人员的日常操作中，归还处理是最为频繁的业务操作之一。当顾客归还租赁的雪具时，工作人员需在系统的订单列表页面中查找对应的租赁订单，点击“确认归还”按钮。系统接收到归还确认操作后，将该订单状态由“使",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 245,
+      "style": "Normal",
+      "text": "图 5.4\t工作人员后台页面",
+      "has_image": true,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 246,
+      "style": "Normal",
+      "text": "@PutMapping(\"/{id}/return\")\npublic Result<Void> returnProduct(@PathVariable Long id) {\n    rentalOrd",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 247,
+      "style": "Normal",
+      "text": "在页面布局方面，工作人员后台界面采用与管理员相同的左侧导航菜单加右侧内容区域的布局方式，但菜单项已根据角色权限进行了精简，仅保留与日常工作直接相关的功能模块。页面顶部展示当前登录的工作人员姓名及角色标",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 248,
+      "style": "Normal",
+      "text": "工作人员在系统中的操作权限主要包括以下几个方面：一是查阅所有租赁订单列表，并可根据订单状态（待支付、使用中、已归还等）进行筛选查询；二是为到店顾客办理雪具或装备的租赁手续，选择商品后录入租赁信息并生成",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 249,
+      "style": "Normal",
+      "text": "在滑雪场的日常运营管理中，工作人员承担着重要的前台业务职责，主要负责为顾客办理雪具和装备的租赁手续以及处理相关订单事务。工作人员使用个人账号登录系统后台后，系统根据其角色权限展示相应的功能菜单，包括商",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 250,
+      "style": "Normal",
+      "text": "图5.5\t工作人员模块的实现",
+      "has_image": true,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 251,
+      "style": "Heading 2",
+      "text": "5.6　数据统计模块的实现",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 252,
+      "style": "Normal",
+      "text": "数据统计模块是管理员了解雪场整体运营状况的重要工具，也是做经营决策的数据支撑。这个模块包含两个主要页面：Dashboard看板页面和数据可视化分析页面。管理员登录后默认进入的就是Dashboard看板",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 253,
+      "style": "Normal",
+      "text": "Dashboard看板页面展示了系统的核心运营数据概览，包括总用户数、今日新增用户数、总订单数、今日订单数、总收入金额、今日收入等关键指标。这些数据通过后端的DashboardController接口",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 254,
+      "style": "Normal",
+      "text": "数据可视化分析页面使用了ECharts图表库来展示各种统计图表。主要包括：收入趋势折线图，展示近30天的每日收入变化趋势；订单类型分布饼图，展示租赁订单、教练预约和课程报名各占的比例；热门商品排行柱状",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 255,
+      "style": "Normal",
+      "text": "\n",
+      "has_image": true,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 256,
+      "style": "Normal",
+      "text": "图5.6　数据统计页面",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 257,
+      "style": "Heading 2",
+      "text": "5.7　系统安全实现",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 258,
+      "style": "Normal",
+      "text": "系统的安全控制主要体现在以下几个方面：",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 259,
+      "style": "Normal",
+      "text": "密码加密存储：用户密码在注册时通过BCryptPasswordEncoder进行加密后才保存到数据库中，BCrypt是一种单向加密算法，即使数据库被泄露也无法直接获取用户的明文密码。",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 260,
+      "style": "Normal",
+      "text": "JWT Token认证：系统配置了JwtAuthenticationFilter过滤器，对每个HTTP请求进行Token的解析和验证。前端在每次请求时会在Authorization请求头中携带Bear",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 261,
+      "style": "Normal",
+      "text": "前端路由守卫：前端在路由配置中使用了beforeEach全局守卫，检查目标路由是否需要登录权限以及当前用户的角色是否有权限访问。如果用户未登录会被重定向到登录页面；如果角色不匹配会被重定向到自己角色对",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 262,
+      "style": "Normal",
+      "text": "跨域配置：由于前后端分别运行在不同的端口（前端5173，后端8080），需要处理跨域请求的问题。后端通过CorsConfig配置类来允许跨域访问。",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 263,
+      "style": "Normal",
+      "text": "前端路由守卫核心逻辑：",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 264,
+      "style": "Normal",
+      "text": "router.beforeEach((to, from, next) => {",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 265,
+      "style": "Normal",
+      "text": "  const userStore = useUserStore()",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 266,
+      "style": "Normal",
+      "text": "  if (to.meta.requiresAuth && !userStore.token) {",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 267,
+      "style": "Normal",
+      "text": "    next('/login')",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 268,
+      "style": "Normal",
+      "text": "  } else if (to.meta.roles &&",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 269,
+      "style": "Normal",
+      "text": "      !to.meta.roles.includes(userStore.userInfo?.role)) {",
+      "has_image": false,
+      "is_code": false
+    },
+    {
+      "type": "paragraph",
+      "index": 270,
+      "style": "Normal",
+      "text": "    next(userStore.userInfo?.role === 'user' ? '/home' : '/admin/dashboard')",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 271,
+      "style": "Normal",
+      "text": "  } else { next() }",
+      "has_image": false,
+      "is_code": true
+    },
+    {
+      "type": "paragraph",
+      "index": 272,
+      "style": "Normal",
+      "text": "})",
+      "has_image": false,
+      "is_code": false
+    }
+  ],
+  "element_order_count": 303
+}

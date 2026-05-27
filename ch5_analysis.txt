@@ -1,0 +1,190 @@
+P178: [Heading 1]  第5章　系统实现
+P179: [Heading 2]  5.1　管理员模块的实现
+P180: [Normal]  管理员是系统的最高权限角色，负责系统整体的数据管理和运营配置。在介绍管理员的具体功能之前，先简要说明系统的开发环境。在正式开始编码之前，需要先搭建好开发环境。后端使用IntelliJ IDEA作为开发工具，通过Maven管理项目依赖。项目创建时使用Spring Initializr初始化，勾选了Web、MyBatis、MySQL Driver、Redis等Starter依赖。前端使用Visual 
+P181: [Normal]  表5.1　开发环境配置
+P182: [Normal]  核心代码：
+P183: [Normal]  }
+P184: [Normal]  return Result.success(overview);
+P185: [Normal]  todayOrders);
+P186: [Normal]  overview.put("todayOrders",
+P187: [Normal]  .count();
+P188: [Normal]  o.getCreateTime()))
+P189: [Normal]  .filter(o -> isToday(
+P190: [Normal]  long todayOrders = orders.stream()
+P191: [Normal]  rentalOrderMapper.selectAll();
+P192: [Normal]  List<RentalOrder> orders =
+P193: [Normal]  overview.put("totalUsers", totalUsers);
+P194: [Normal]  .count();
+P195: [Normal]  .equals(u.getRole()))
+P196: [Normal]  .filter(u -> "user"
+P197: [Normal]  long totalUsers = users.stream()
+P198: [Normal]  userMapper.selectAll();
+P199: [Normal]  List<User> users =
+P200: [Normal]  new HashMap<>();
+P201: [Normal]  Map<String, Object> overview =
+P202: [Normal]  getOverview() {
+P203: [Normal]  public Result<Map<String, Object>>
+P204: [Normal]  @GetMapping("/overview")
+P205: [Normal]  图5.6　数据统计页面
+P206: [Normal] [IMG] (no text)
+P207: [Normal]  数据可视化分析页面使用了ECharts图表库来展示各种统计图表。主要包括：收入趋势折线图，展示近30天的每日收入变化趋势；订单类型分布饼图，展示租赁订单、教练预约和课程报名各占的比例；热门商品排行柱状图，展示租赁次数最多的商品。前端使用Vue的onMounted生命周期钩子在页面加载时请求数据，然后调用ECharts的setOption方法渲染图表。
+P208: [Normal]  Dashboard看板页面展示了系统的核心运营数据概览，包括总用户数、今日新增用户数、总订单数、今日订单数、总收入金额、今日收入等关键指标。这些数据通过后端的DashboardController接口获取，接口内部对多张业务表进行聚合查询和统计。为了避免每次访问都执行复杂的数据库查询，统计结果会缓存到Redis中，设置了5分钟的过期时间。
+P209: [Normal]  数据统计模块是管理员了解雪场整体运营状况的重要工具，也是做经营决策的数据支撑。这个模块包含两个主要页面：Dashboard看板页面和数据可视化分析页面。管理员登录后默认进入的就是Dashboard看板页面。
+P210: [Normal]  用户端以卡片形式展示可租赁的商品，每张卡片显示商品图片、名称、品牌、租赁价格等信息。用户选择商品后指定租赁时间和数量，系统自动计算租赁费用并生成订单。订单创建时系统自动扣减商品的可用数量，归还时再加回来。租赁订单有待支付、使用中、已归还、已取消四种状态，工作人员可以在后台管理所有的租赁订单，进行归还确认和取消操作。
+P211: [Normal]  }
+P212: [Normal]  return Result.success(result);
+P213: [Normal]  }
+P214: [Normal]  });
+P215: [Normal]  p.setPassword(null);
+P216: [Normal]  result.getList().forEach(p -> {
+P217: [Normal]  if (result.getList() != null) {
+P218: [Normal]  page, pageSize, name, category);
+P219: [Normal]  productService.pageByCondition(
+P220: [Normal]  PageResult<Product> result =
+P221: [Normal]  String category) {
+P222: [Normal]  @RequestParam(required = false)
+P223: [Normal]  String name,
+P224: [Normal]  @RequestParam(required = false)
+P225: [Normal]  Integer pageSize,
+P226: [Normal]  @RequestParam(defaultValue = "10")
+P227: [Normal]  Integer page,
+P228: [Normal]  @RequestParam(defaultValue = "1")
+P229: [Normal]  public Result<PageResult<Product>> getByCondition(
+P230: [Normal]  @GetMapping("/page/condition")
+P231: [Normal]  核心代码：
+P232: [Normal]  图5.2　商品管理页面
+P233: [Normal] [IMG] (no text)
+P234: [Normal]  管理员和工作人员可以在后台的商品管理页面对商品进行增删改查操作。页面顶部有搜索区域，可以按商品名称和分类进行筛选查询。列表使用了Element Plus的el-table组件来展示数据，支持分页功能，每页显示10条记录。点击“增”钮会弹出对话框让用户填写商品信息，包括商品编号、名称、分类、品牌、租赁价格、销售价格、库存数量等字段。编辑操作也是弹出同样的对话框，只是自动填入了已有的数据。删除操作采用
+P235: [Normal]  商品管理模块是系统的核心业务模块之一，统一管理滑雪场的雪具和装备信息。在本系统的设计中，雪具（如滑雪板、雪鞋、头盔等）和装备（如护具、雪镜等）统一放在一张商品表中管理，通过category字段区分是雪具、装备还是配件。这种设计方案的优势在于数据结构更简洁，前后端的代码也不用分开写两套。
+P236: [Heading 3]  5.1.1　商品管理功能
+P237: [Heading 3]  5.1.2　数据统计功能
+P238: [Heading 2]  5.2　用户模块的实现
+P239: [Normal]  普通用户是系统的最终使用者，通过前台页面访问各项服务功能。用户登录是系统的入口功能。前端登录页面采用了左右分栏的布局，左侧展示系统名称和特色功能介绍，右侧是登录和注册的表单区域，支持在登录和注册两个Tab页之间切换。登录表单中用到了Element Plus的el-form组件，配合el-input来收集用户名和密码，并使用了表单验证规则来限制输入。
+P240: [Normal]  登录的具体流程如下：用户输入用户名和密码后点击登录按钮，前端先对表单进行校验（用户名和密码不能为空），校验通过后通过Axios向后端发送POST请求。后端UserController接收到请求后，调用UserService验证用户名和密码，密码验证使用BCryptPasswordEncoder进行比对。验证通过后生成JWT Token，连同用户信息一起返回给前端。前端收到数据后将Token和用户信
+P241: [Normal] [IMG] (no text)
+P242: [Normal]  图5.1　用户登录页面
+P243: [Normal]  核心代码：
+P244: [Normal]  public static String generateToken(
+P245: [Normal]  Long userId, String username,
+P246: [Normal]  String role) {
+P247: [Normal]  Map<String, Object> claims = new HashMap<>();
+P248: [Normal]  claims.put("userId", userId);
+P249: [Normal]  claims.put("username", username);
+P250: [Normal]  claims.put("role", role);
+P251: [Normal]  Date issuedAt = new Date();
+P252: [Normal]  long expireMillis = 7 * 24 * 3600 * 1000L;
+P253: [Normal]  Date expiration = new Date(
+P254: [Normal]  issuedAt.getTime() + expireMillis);
+P255: [Normal]  return Jwts.builder()
+P256: [Normal]  .setClaims(claims)
+P257: [Normal]  .setSubject(username)
+P258: [Normal]  .setIssuedAt(issuedAt)
+P259: [Normal]  .setExpiration(expiration)
+P260: [Normal]  .signWith(getSecretKey(),
+P261: [Normal]  SignatureAlgorithm.HS256)
+P262: [Normal]  .compact();
+P263: [Normal]  }
+P264: [Heading 2]  5.3　教练模块的实现
+P265: [Normal]  教练预约涉及管理员、教练和用户三个角色。管理员在后台维护教练的基本信息，包括姓名、等级、专长、课时费等。教练列表页面支持按姓名、等级和状态进行筛选查询。
+P266: [Normal]  用户端的教练预约页面展示了所有在职教练的信息。用户选择教练后，需要指定预约日期、开始时间和结束时间，系统根据教练的课时费和预约时长自动计算费用。提交预约后状态为“待确认”。教练登录后可在“员预约”面查看并确认或取消预约。后端通过coach_id进行数据隔离，确保每个教练只能看到自己的预约数据：
+P267: [Normal] [IMG] 图5.3　教练预约页面
+P269: [Normal]  核心代码：
+P270: [Normal]  @GetMapping("/my-bookings")
+P271: [Normal]  public Result<List<CoachBooking>>
+P272: [Normal]  getMyBookings() {
+P273: [Normal]  Long userId =
+P274: [Normal]  SecurityUtils.getCurrentUserId();
+P275: [Normal]  Coach coach =
+P276: [Normal]  coachService.getByUserId(userId);
+P277: [Normal]  if (coach == null) {
+P278: [Normal]  return Result.error(
+P279: [Normal]  "教练信息不存在");
+P280: [Normal]  }
+P281: [Normal]  List<CoachBooking> bookings =
+P282: [Normal]  coachBookingService
+P283: [Normal]  .getByCoachId(coach.getId());
+P284: [Normal]  bookings.sort((a, b) ->
+P285: [Normal]  b.getBookingDate().compareTo(
+P286: [Normal]  a.getBookingDate()));
+P287: [Normal]  return Result.success(bookings);
+P288: [Normal]  }
+P289: [Heading 2]  5.4　工作人员模块的实现
+P290: [Normal]  课程管理模块包含课程的发布管理和学员的报名功能。管理员在后台可以发布新课程，需要填写课程名称、类型（初级入门/中级进阶/高级提升）、授课教练、开课日期、上课时间、场地、最大学员数和价格等信息。添加课程时，前端会同时请求教练列表和场地列表作为下拉选项，管理员可以直接选择而无需手动输入ID。用户端的课程页面展示所有“报名中”的课程，用户点击报名后系统会检查报名人数是否已满，未满则允许报名并将当前报名人
+P291: [Normal]  场地管理比较简单。管理员可以在后台录入和编辑场地信息，包括场地名称、类型、难度等级和容纳人数。系统预置了初级雪道、中级雪道、高级雪道和自由式公园等场地数据。雪道类型的场地包含在门票里不用另外收费，自由式公园则需要额外收费。用户可以查看各场地的状态信息，对需要付费的场地进行在线预约。
+P292: [Normal]  在工作人员的日常操作中，归还处理是最为频繁的业务操作之一。当顾客归还租赁的雪具时，工作人员需在系统的订单列表页面中查找对应的租赁订单，点击“确认归还”按钮。系统接收到归还确认操作后，将该订单状态由“使用中”更新为“已归还”，同时自动恢复对应商品的可用库存数量。以下为后端处理归还操作的核心代码：
+P293: [Normal] [IMG] (no text)
+P294: [Normal]  图 5.4  工作人员后台页面
+P295: [Normal]  核心代码：
+P296: [Normal]  @PutMapping("/{id}/return")
+P297: [Normal]  public Result<Boolean> returnEquipment(
+P298: [Normal]  @PathVariable Long id) {
+P299: [Normal]  RentalOrder order =
+P300: [Normal]  rentalOrderService.getById(id);
+P301: [Normal]  if (order == null) {
+P302: [Normal]  return Result.error("订单不存在");
+P303: [Normal]  }
+P304: [Normal]  if (order.getOrderStatus() != 1) {
+P305: [Normal]  return Result.error(
+P306: [Normal]  "当前状态不允许归还");
+P307: [Normal]  }
+P308: [Normal]  order.setOrderStatus(2);
+P309: [Normal]  order.setRentalEndTime(new Date());
+P310: [Normal]  Product product = productService
+P311: [Normal]  .getById(order.getProductId());
+P312: [Normal]  product.setAvailableQuantity(
+P313: [Normal]  product.getAvailableQuantity() + 1);
+P314: [Normal]  productService.update(product);
+P315: [Normal]  rentalOrderService.update(order);
+P316: [Normal]  return Result.success(true);
+P317: [Normal]  }
+P318: [Normal]  工作人员后台采用左侧导航加右侧内容区域的布局方式，菜单项根据角色权限进行了精简。商品管理页面提供按名称和分类检索的功能，租赁订单页面支持按状态筛选并可直接执行归还操作。
+P319: [Normal]  工作人员的主要操作权限涵盖租赁订单管理、商品信息查看、场地状态管理等方面。
+P320: [Normal]  工作人员在系统中主要负责前台业务操作，登录后台后可使用商品信息管理、租赁订单处理及场地状态查看等功能。
+P321: [Normal] [IMG] (no text)
+P322: [Normal]  图5.5	工作人员模块的实现
+P323: [Normal]  核心代码：
+P324: [Normal]  @GetMapping("/page/condition")
+P325: [Normal]  public Result<PageResult<RentalOrder>>
+P326: [Normal]  pageByCondition(
+P327: [Normal]  @RequestParam(required = false)
+P328: [Normal]  String orderNo,
+P329: [Normal]  @RequestParam(required = false)
+P330: [Normal]  Integer status,
+P331: [Normal]  @RequestParam(defaultValue = "1")
+P332: [Normal]  Integer pageNum,
+P333: [Normal]  @RequestParam(defaultValue = "10")
+P334: [Normal]  Integer pageSize) {
+P335: [Normal]  PageResult<RentalOrder> result =
+P336: [Normal]  rentalOrderService.pageByCondition(
+P337: [Normal]  orderNo, null, null,
+P338: [Normal]  status, pageNum, pageSize);
+P339: [Normal]  return Result.success(result);
+P340: [Normal]  }
+P342: [Heading 2]  5.5　系统安全实现
+P343: [Normal]  系统的安全控制主要体现在以下几个方面：
+P344: [Normal]  密码加密存储：用户密码在注册时通过BCryptPasswordEncoder进行加密后才保存到数据库中，BCrypt是一种单向加密算法，即使数据库被泄露也无法直接获取用户的明文密码。
+P345: [Normal]  JWT Token认证：系统配置了JwtAuthenticationFilter过滤器，对每个HTTP请求进行Token的解析和验证。前端在每次请求时会在Authorization请求头中携带Bearer Token，后端过滤器从中提取Token并验证，验证通过后将用户信息设置到Security上下文中。
+P346: [Normal]  前端路由守卫：前端在路由配置中使用了beforeEach全局守卫，检查目标路由是否需要登录权限以及当前用户的角色是否有权限访问。如果用户未登录会被重定向到登录页面；如果角色不匹配会被重定向到自己角色对应的首页。
+P347: [Normal]  跨域配置：由于前后端分别运行在不同的端口（前端5173，后端8080），需要处理跨域请求的问题。后端通过CorsConfig配置类来允许跨域访问。
+P348: [Normal]  前端路由守卫核心逻辑：
+P349: [Normal]  核心代码：
+P350: [Normal]  router.beforeEach((to, from, next) => {
+P351: [Normal]  const userStore = useUserStore()
+P352: [Normal]  const token = userStore.token
+P353: [Normal]  const role = userStore.userInfo?.role
+P354: [Normal]  if (to.meta.requiresAuth && !token) {
+P355: [Normal]  ElMessage.warning('请先登录')
+P356: [Normal]  next('/login')
+P357: [Normal]  return
+P358: [Normal]  }
+P359: [Normal]  if (to.meta.roles &&
+P360: [Normal]  !to.meta.roles.includes(role)) {
+P361: [Normal]  ElMessage.error('无权限访问')
+P362: [Normal]  const target = role === 'user'
+P363: [Normal]  ? '/home'
+P364: [Normal]  : '/admin/dashboard'
+P365: [Normal]  next(target)
+P366: [Normal]  return
+P367: [Normal]  }
+P368: [Normal]  next()
+P369: [Normal]  })

@@ -1,0 +1,9 @@
+角色	用户名	密码	登录后跳转	权限
+管理员	admin	123456	/admin/dashboard	⭐⭐⭐ 最高权限，管理所有数据
+教练	coach1	123456	/admin/dashboard	⭐⭐ 张教练（单板滑雪、自由式）3门课程
+教练	coach2	123456	/admin/dashboard	⭐⭐ 李教练（双板滑雪）3门课程
+教练	coach3	123456	/admin/dashboard	⭐⭐ 王教练（竞技滑雪）1门课程
+教练	coach4	123456	/admin/dashboard	⭐⭐ 赵教练（儿童教学）1门课程
+教练	coach5	123456	/admin/dashboard	⭐⭐ 刘教练（零基础教学）0门课程
+用户	testuser	123456	/home	⭐ 浏览、租赁、预约
+
